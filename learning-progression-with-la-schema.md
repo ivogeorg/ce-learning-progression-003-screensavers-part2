@@ -5,27 +5,6 @@ This is learning progression 003 for the Fall 2020 installment of the course CPE
 Table of Contents
 =================
 
-* [CPE 1040 \- Fall 2020](#cpe-1040---fall-2020)
-  * [Learning Progression 003: Screensavers (Part 2)](#learning-progression-003-screensavers-part-2)
-    * [4\. Divide &amp; conquer: program decomposition](#4-divide--conquer-program-decomposition)
-      * [1\. Study](#1-study-3)
-        * [Two modes: working &amp; asleep](#two-modes-working--asleep)
-        * [Sub\-programs](#sub-programs)
-        * [Matching gestures and screensavers](#matching-gestures-and-screensavers)
-      * [2\. Apply](#2-apply-3)
-      * [3\. Present](#3-present-3)
-    * [5\. Randomized behavior](#5-randomized-behavior)
-      * [1\. Study](#1-study-4)
-      * [2\. Apply](#2-apply-4)
-      * [3\. Present](#3-present-4)
-    * [6\. Encapsulation](#6-encapsulation)
-      * [1\. Study](#1-study-5)
-      * [2\. Apply](#2-apply-5)
-      * [3\. Present](#3-present-5)
-    * [7\. Functions revisited](#7-functions-revisited)
-      * [1\. Study](#1-study-6)
-      * [2\. Apply](#2-apply-6)
-      * [3\. Present](#3-present-6)
       
 ## Learning Progression 003: Screensavers (Part 2)
 [[toc](#table-of-contents)]

@@ -5,6 +5,25 @@ This is learning progression 003 for the Fall 2020 installment of the course CPE
 Table of Contents
 =================
 
+* [CPE 1040 \- Fall 2020](#cpe-1040---fall-2020)
+* [Table of Contents](#table-of-contents)
+  * [Learning Progression 003: Screensavers (Part 2)](#learning-progression-003-screensavers-part-2)
+    * [5\. Randomized behavior](#5-randomized-behavior)
+      * [1\. Study](#1-study)
+      * [2\. Apply](#2-apply)
+      * [3\. Present](#3-present)
+    * [6\. Encapsulation](#6-encapsulation)
+      * [1\. Study](#1-study-1)
+      * [2\. Apply](#2-apply-1)
+      * [3\. Present](#3-present-1)
+    * [7\. Functions revisited](#7-functions-revisited)
+      * [1\. Study](#1-study-2)
+      * [2\. Apply](#2-apply-2)
+      * [3\. Present](#3-present-2)
+    * [8\. Classes revisited](#8-classes-revisited)
+      * [1\. Study](#1-study-3)
+      * [2\. Apply](#2-apply-3)
+      * [3\. Present](#3-present-3)
       
 ## Learning Progression 003: Screensavers (Part 2)
 [[toc](#table-of-contents)]

@@ -61,11 +61,11 @@ Let's review the randomizations we have used so far in this progression, along w
 2. `freqBars()` also has a similarly simple randomization, namely the height of the bars. Again, this can be achieved with the use of `randint(0, 4)`. _Note, however, that the vertical coordinate of the LED matrix grows from 0 at the top down to 4 at the bottom, so you need to subtract the number you get from the maximum height. And you may also have to plot LEDs in an inverted `for` loop._  
 3. `rain()` has a little more elaborate randomization, namely that it adopts an internal concept of _distance_ in order to move the "raindrops" differently depending on how far they are from the viewer. In particular, there are 5 levels of depth, with 0 being the "closest" and 4 being the "farthest". The raindrops are brighter in the foreground than in the background, and are moving faster across the screen in the foreground than in the background. This kind of randomization requires something other than `basic.pause()` to achieve, because `basic.pause()` causes the processor to idle, regardless of what else might also be running on it. `distance` is used in two ways:
    - first, initialized with `Math.randomRange(0, 4)`, to pick the brightness of the raindrop from the array `brightLevels: number[] = [240, 180, 60, 30, 1]`, and  
-   - second, combined with another field called `time_step`, to pick how often to let the raindrop fall, in the `fall()` method of the `Raindrop` class:
+   - second, combined with another field called `time_step` (which is initialized to zero in the constructor and also upon reset), to pick how often to let the raindrop fall, in the `fall()` method of the `Raindrop` class:
      ```javascript
      fall() {
          this.setBrightness(this.brightLevels[this.distance])
-         if (this.time_step == this.distance) {                       // time_step is initialized and reset to zero
+         if (this.time_step == this.distance) {                       // let the raindrop fall only when it matches its distance (see last line)
              this.hide()
              this.y = this.y + 1
              this.show()
@@ -73,27 +73,26 @@ Let's review the randomizations we have used so far in this progression, along w
          this.time_step = (this.time_step + 1) % (this.distance + 1)  // advance time_step modulo the distance (indexed starting at 1, not 0)
      }
      ```
-   The rain simulation creates a certain number of raindrops and reuses them when they fall off the bottom, resetting them to a random distance and a random column and wrapping them around to the top. The rain is just an array `let rain: Raindrop[] = []` that a `rainfall()` function cycles through indefinitely. This makes the simulation appear random, rather than a repeating pattern.
+   The rain simulation creates a certain number of raindrops and reuses them when they fall off the bottom, resetting them to a random distance and a random column and wrapping them around to the top. The rain is just an array `let rainfall: Raindrop[] = []` that a `rain()` function cycles through indefinitely. This makes the simulation appear random, rather than a repeating pattern.
 
 **TODO** new rain video
 
 ##### Bouncing marbles
 
-**TODO** bouncing marbles video
+This section introduces a new screensaver, called Bouncing Marbles. Here is a [video](). **TODO** bouncing marbles video
 
-    - dimensions of randomization  
-    - write your own custom randomization routines  
-    - the bouncing-ball randomization (multiple dimensions)  
+**TODO** narrative, possibly after rewriting the 
 
 #### 2. Apply
 [[toc](#table-of-contents)]
 
 1. `[<lernact-prac>]`Write a function `randomPrime` that generates random primes in the range [1, 1000]. _How many primes are there in this range?_ Write a small program to demonstrate the operation.    
 
-2. `[<lernact-prac>]`Add depth (aka distance) to your rain simulation.  
+2. `[<lernact-prac>]`Add depth (aka distance) to your rain simulation, with more distant raindrops appearing dimmer and moving more slowly.  
 
-3. `[<lernact-prac>]`Implement the `bouncing_marbles()` screensaver and add it to your screensavers program matched to the `Shake` gesture.
+3. `[<lernact-prac>]`Implement the `bouncing_marbles()` screensaver function and add it to your screensavers program matched to the `Shake` gesture.
 
+4. `[<lernact-prac>]`**[Optional challenge, max 3 extra step points]** Modify your `rain()` function to show the raindrops falling at 45° to the right.  
 
 #### 3. Present
 [[toc](#table-of-contents)]
@@ -102,6 +101,7 @@ In the [programs](programs) directory:
 1. Add your program from 5.2.1 with filename `microbit-program-5-2-1.js`.  
 2. Add your program from 5.2.2 with filename `microbit-program-5-2-2.js`.  
 3. Add your program from 5.2.3 with filename `microbit-program-5-2-3.js`.  
+3. Add your program from 5.2.4 with filename `microbit-program-5-2-4.js`.  
 
 In the [Lab Notebook](README.md):
 1. Link to the program from 5.2.1.  
@@ -110,6 +110,8 @@ In the [Lab Notebook](README.md):
 4. Link to a demo video showing the execution of the program from 5.2.2.  
 5. Link to the program from 5.2.3.  
 6. Link to a demo video showing the execution of the program from 5.2.3.  
+7. Link to the program from 5.2.4.  
+8. Link to a demo video showing the execution of the program from 5.2.4.  
 
 
 ### 6. Encapsulation    

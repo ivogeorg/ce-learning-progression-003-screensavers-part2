@@ -68,6 +68,8 @@ Let's review the randomizations we have used so far in this progression, along w
    - first, initialized with `Math.randomRange(0, 4)`, to pick the brightness of the raindrop from the array `brightLevels: number[] = [240, 180, 60, 30, 1]`, and  
    - second, combined with another field called `time_step` (which is initialized to zero in the constructor and also upon reset), to pick how often to let the raindrop fall, in the `fall()` method of the `Raindrop` class:
      ```javascript
+     // Example 5.1.1
+     
      fall() {
          this.setBrightness(this.brightLevels[this.distance])
          if (this.time_step == this.distance) {                       // let the raindrop fall only when it matches its distance (see last line)
@@ -80,13 +82,73 @@ Let's review the randomizations we have used so far in this progression, along w
      ```
    The rain simulation creates a certain number of raindrops and reuses them when they fall off the bottom, resetting them to a random distance and a random column and wrapping them around to the top. The rain is just an array `let rainfall: Raindrop[] = []` that a `rain()` function cycles through indefinitely. This makes the simulation appear random, rather than a repeating pattern.
 
-**TODO** new rain video
+Here is one more [video](https://msudenver.yuja.com/Dashboard/Permalink?authCode=1520695895&b=1815435&linkType=video) or the rain, this one with more pronounced variation in brightness.
 
 ##### Bouncing marbles
 
-This section introduces a new screensaver, called Bouncing Marbles. Here is a [video](). **TODO** bouncing marbles video
+`[<lernact-rd>]`This section introduces a new screensaver, called Bouncing Marbles. Here is a [video](https://msudenver.yuja.com/Dashboard/Permalink?authCode=879279461&b=1815473&linkType=video). T
 
-**TODO** narrative, possibly after rewriting the 
+his screensaver probably has the most complex randomization of all that we have seen so far. Just like `rain()`, which used a modulo mechanism to space out the calls to `fall()` for `Raindrop` objects, `bouncing_marbles` uses a modulo mechanism to (i) follow a trajectory with steps spaced at uneven intervals, and (ii) "realease" a group of marbles at random intervals, so that they don't all fall together in parallel.
+
+For reference, here is the `trajectory` array, which you may use yourself or modify, as you wish (you _will_ have to modify it for one of the **Optional challenges** below):
+```javascript
+// Example 5.1.2
+
+enum Falling { Down = 0, Up }
+enum Target { Simulator = 0, Microbit }
+enum Trajectory { Vertical = 0, Duration, Heading }
+
+this.trajectory = [                  // Heading not necessary but left in for readibility
+            [0,  50, Falling.Down],
+            [1, 120, Falling.Down],
+            [2,  80, Falling.Down],
+            [3,  30, Falling.Down],
+            [4,  10, Falling.Up],
+            [3,  40, Falling.Up],
+            [2, 100, Falling.Up],
+            [1, 160, Falling.Down],
+            [2, 100, Falling.Down],
+            [3,  50, Falling.Down],
+            [4,  20, Falling.Up],
+            [3,  70, Falling.Up],
+            [2, 120, Falling.Down],
+            [3,  90, Falling.Down],
+            [4,  50, Falling.Up],
+            [3, 120, Falling.Down],
+            [4, 100, Falling.Up],
+            [4, 120, Falling.Down]
+        ]
+```
+and here is a code snippet (not an executable program) from the `move()` method of the `Marble` class:
+```javascript
+// Example 5.1.3
+
+        if (this.counter % this.trajectory[this.step][Trajectory.Duration] == 0) {
+            led.unplot(this.x, this.y)
+            this.step ++
+            if (this.step == this.trajectory.length) {
+                this.active = false
+            } else {
+                this.y = this.trajectory[this.step][Trajectory.Vertical]
+                led.plotBrightness(this.x, this.y, this.y == 4 ? 255 : this.brightness)
+            }
+        }
+
+        this.counter ++
+```
+
+The randomization of the falling marble sets (1 marble, 2 marbles, etc) in the main loop of the `bouncing_marbles` function has three main steps:
+1. First, a `numMarbles` is assigned a random number by `randint(1, 5)`.  
+2. Secong, in a loop with a modulus mechanism, `numMarbles` `Marble` objects are created with random brightness and speced out randomly. This creates the impression that the marbles are _"realeased"_ at differen times.  
+3. The marbles, which are kept in an array, have their `move()` method called until they are done with their trajectories, at which time they are deleted.
+
+##### Simulator infidelity
+
+You may notice that when `while` loops instead of `basic.forever` for the main loop of your program, you may experience vast difference in execution speed between the micro:bit simulator in MakeCode and the micro:bit device. Usually the `while` loop is much faster than the `basic.forever`. More on this in a later step, but for the `bouncing_marbles()` program, because of having to cycle through multiple ball trajectories and the increased burden of the randomization, the simulator runs about 100 times faster than the device. If you want to use the simulator for development, while still being sure that it will run in a reasonable amount of time on the device, you may need to use a 100 multiplier for the `Duration` column of the `trajectory` array for the simulator, to slow it down relative to the device.
+
+##### Thread unsafety
+
+While we will cover `[<cept>]`_threads_ (that is, _execution threads_), `[<cept>]`_multithreading_, and `[<cept>]`_thread safety_ in a later step, we need to mention that you may encounter the [micro:bit error code](https://makecode.microbit.org/device/error-codes) 980 (`undefined`) when all of a sudden the program tries to call the `move()` method on a `null` (that is, undefined) `Marble` object. _(Error codes are shown on the LED matrix by first showing a sad/frowny face icon and then scrolling the error number.)_ This is most likely caused by the _"thread unsafety"_ of the micro:bit and is not your fault. In short, the micro:bit has a task scheduler which breaks up longer code blocks into smaller portions to execute, alternating among several so broken-up code sequences. The ordering is somewhat random, which may cause portions of your program to run in the wrong order, relative to the order that you designed them to run in per your program structure.
 
 #### 2. Apply
 [[toc](#table-of-contents)]
@@ -95,9 +157,11 @@ This section introduces a new screensaver, called Bouncing Marbles. Here is a [v
 
 2. `[<lernact-prac>]`Add depth (aka distance) to your rain simulation, with more distant raindrops appearing dimmer and moving more slowly.  
 
-3. `[<lernact-prac>]`Implement the `bouncing_marbles()` screensaver function and add it to your screensavers program matched to the `Shake` gesture.
+3. `[<lernact-prac>]`Implement the `bouncing_marbles()` screensaver function and add it to your screensavers program matched to the `Shake` gesture. Requirements:
 
 4. `[<lernact-prac>]`**[Optional challenge, max 3 extra step points]** Modify your `rain()` function to show the raindrops falling at 45° to the right.  
+
+5. `[<lernact-prac>]`**[Optional challenge, max 3 extra step points]** Modify your `bouncing_marbles()` to be able to show balls of different trajectories, simulating different elasticity coefficients of the marble material (think steel vs glass vs rubber resin).  
 
 #### 3. Present
 [[toc](#table-of-contents)]
@@ -106,7 +170,8 @@ In the [programs](programs) directory:
 1. Add your program from 5.2.1 with filename `microbit-program-5-2-1.js`.  
 2. Add your program from 5.2.2 with filename `microbit-program-5-2-2.js`.  
 3. Add your program from 5.2.3 with filename `microbit-program-5-2-3.js`.  
-3. Add your program from 5.2.4 with filename `microbit-program-5-2-4.js`.  
+4. Add your program from 5.2.4 with filename `microbit-program-5-2-4.js`.  
+5. Add your program from 5.2.5 with filename `microbit-program-5-2-5.js`.  
 
 In the [Lab Notebook](README.md):
 1. Link to the program from 5.2.1.  
@@ -117,6 +182,8 @@ In the [Lab Notebook](README.md):
 6. Link to a demo video showing the execution of the program from 5.2.3.  
 7. Link to the program from 5.2.4.  
 8. Link to a demo video showing the execution of the program from 5.2.4.  
+9. Link to the program from 5.2.5.  
+10. Link to a demo video showing the execution of the program from 5.2.5.  
 
 
 ### 6. Encapsulation    

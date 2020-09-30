@@ -87,9 +87,9 @@ Here is one more [video](https://msudenver.yuja.com/Dashboard/Permalink?authCode
 
 ##### Bouncing marbles
 
-`[<lernact-rd>]`This section introduces a new screensaver, called Bouncing Marbles. Here is a [video](https://msudenver.yuja.com/Dashboard/Permalink?authCode=879279461&b=1815473&linkType=video). T
+`[<lernact-rd>]`This section introduces a new screensaver, called Bouncing Marbles. Here is a [video](https://msudenver.yuja.com/Dashboard/Permalink?authCode=879279461&b=1815473&linkType=video).
 
-his screensaver probably has the most complex randomization of all that we have seen so far. Just like `rain()`, which used a modulo mechanism to space out the calls to `fall()` for `Raindrop` objects, `bouncing_marbles` uses a modulo mechanism to (i) follow a trajectory with steps spaced at uneven intervals, and (ii) "realease" a group of marbles at random intervals, so that they don't all fall together in parallel.
+This screensaver probably has the most complex randomization of all that we have seen so far. Just like `rain()`, which used a modulo mechanism to space out the calls to `fall()` for `Raindrop` objects, `bouncing_marbles` uses a modulo mechanism to (i) follow a trajectory with steps spaced at uneven intervals, and (ii) "realease" a group of marbles at random intervals, so that they don't all fall together in parallel.
 
 For reference, here is the `trajectory` array, which you may use yourself or modify, as you wish (you _will_ have to modify it for one of the **Optional challenges** below):
 ```javascript
@@ -143,7 +143,8 @@ This snippet should help with understanding the function of the `Duration` colum
 
 Finally, the randomization of the falling marble sets (1 marble, 2 marbles, etc) in the main loop of the `bouncing_marbles` function has three main steps:
 1. First, a `numMarbles` is assigned a random number by `randint(1, 5)`.  
-2. Secong, in a loop with a modulus mechanism, `numMarbles` `Marble` objects are created with random brightness and speced out randomly. This creates the impression that the marbles are _"realeased"_ at differen times.  
+**TODO**: Not only the number of marbles, but the column indices are also randomized!!! (Array)
+2. Second, in a loop with a modulus mechanism, `numMarbles` `Marble` objects are created with random brightness and speced out randomly. This creates the impression that the marbles are _"realeased"_ at differen times.  
 3. The marbles, which are kept in an array, have their `move()` method called until they are done with their trajectories, at which time they are deleted.
 
 ##### Simulator infidelity

@@ -37,6 +37,35 @@ This progression is the culmination of the first part of the course, in which we
 #### 1. Study
 [[toc](#table-of-contents)]
 
+##### Importance of randomization
+
+`[<lernact-rd>]`We have used `[<cept>]`_randomization_ in fairly inconsequential ways so far, mostly to have somewhat unpredictable behavior of the output on the micro:bit 5 x 5 matrix. However, randomization is extremely important in science and engineering. Among other things, it allows generating important variation in test and diagnostics programs, achieving nearly-even coverage in probability distribution sampling, and good spreading in hash table storage. The full significance of randomization is well beyond the scope of this course.
+
+##### Pseudorandom numbers
+
+The numbers that the `random` functions return are actually `[<cept>]`[_pseudorandom_](https://en.wikipedia.org/wiki/Pseudorandom_number_generator), which means that an algorithm generates them in an extremely long evenly spread-out sequence. The number of elements in the whole sequence is so large, that in any specific location along it, there appears to be no relationship between nearby elements. Truly random functions are usually only achieved based on [random physical phenomena](https://www.random.org/randomness/).
+
+##### Random functions
+
+In MakeCode, we have access to three randomization functions:
+1. `Math.random()` returns a pseudorandom floating-point (that is, a (possibly `[<cept>]`_truncated_) real number) number between 0 and 1. _Note that the value of 1 is [not included](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Math/random)._  
+2. `Math.randomBoolean()` returns `true` or `false` with the evenness of a pseudorandom generator. This is akin to a `[<cept>]`_coin toss_. Just like a coin toss, you cannot expect any kind of `[<cept>]`_alternation_ of `true` and `false`. They are evenly distributed (that is, there is an approximately even number of `true` and `false` value) only in the `[<cept>]`_limit_ of `[<cept>]`_infinite_ trials.  
+3. `randint(min, max)` is provided as a convenience function in MakeCode and is not usually part of the canonical JavaScript library. It returns `[<cept>]`_signed integers_, that is the values of the numbers it returns are whole numbers, which can be negative, positive, and/or zero. Curiously, the ordering of the arguments is not enforced. That is, `randint(0, 4)` is functionally equivalent to `randint(4, 0)`. _Note that both min and max are included in the range from which pseudorandom integers are returned._  
+
+Using these functions, you can write your own randomization routines, to fit your purposes.
+
+##### Randomization in the target program
+
+Let's review the randomizations we have used so far in this progression, along with some implementation pointers:
+1. `coding()` has a very simple randomization, namely the length of the "code lines", which can be achieved with a straightforward use of `randint(0, 5)` or `randint(1, 5)`, depending on whether we want to have empty lines or not.  
+2. `freqBars()` also has a similarly simple randomization, namely the height of the bars. Again, this can be achieved with the use of `randint(0, 4)`. _Note, however, that the vertical coordinate of the LED matrix grows from 0 at the top down to 4 at the bottom, so you need to subtract the number you get from the maximum height. And you may also have to plot LEDs in an inverted `for` loop._  
+3. `rain()` has a little more elaborate randomization, namely that it adopts an internal concept of _distance_ in order to move the "raindrops" differently depending on how far they are from the viewer. In particular, there are 5 levels of depth, with 0 being the "closest" and 4 being the "farthest". The raindrops are brighter in the foreground than in the background, and are moving faster across the screen in the foreground than in the background. This kind of randomization requires something other than `basic.pause()` to achieve, because `basic.pause()` causes the processor to idle, regardless of what else might also be running on it. Distance is used in two ways:
+   - first, to pick the brightness of the raindrop from the array `brightLevels: number[] = [240, 180, 60, 30, 1]`, and  
+   - second, to pick how often to let the raindrop fall  **TODO**
+
+##### Bouncing marbles
+
+
     - dimensions of randomization  
     - the family of random functions  (`random`, `randint`, `randomBoolean()`, etc.)   
     - write your own custom randomization routines  

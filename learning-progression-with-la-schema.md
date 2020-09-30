@@ -10,6 +10,11 @@ Table of Contents
   * [Learning Progression 003: Screensavers (Part 2)](#learning-progression-003-screensavers-part-2)
     * [5\. Randomized behavior](#5-randomized-behavior)
       * [1\. Study](#1-study)
+        * [Importance of randomization](#importance-of-randomization)
+        * [Pseudorandom numbers](#pseudorandom-numbers)
+        * [Random functions](#random-functions)
+        * [Randomization in the target program](#randomization-in-the-target-program)
+        * [Bouncing marbles](#bouncing-marbles)
       * [2\. Apply](#2-apply)
       * [3\. Present](#3-present)
     * [6\. Encapsulation](#6-encapsulation)
@@ -24,7 +29,7 @@ Table of Contents
       * [1\. Study](#1-study-3)
       * [2\. Apply](#2-apply-3)
       * [3\. Present](#3-present-3)
-      
+
 ## Learning Progression 003: Screensavers (Part 2)
 [[toc](#table-of-contents)]
 

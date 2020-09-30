@@ -120,7 +120,9 @@ this.trajectory = [                  // Heading not necessary but left in for re
             [4, 120, Falling.Down]
         ]
 ```
-and here is a code snippet (not an executable program) from the `move()` method of the `Marble` class:
+Please, understand that the numbers in the second column are **not** milliseconds. They only make sense _relative to each other_, and then **only** if other program execution timing factors don't break the proportionality (e.g. extra computation for 5 marbles in comparison to fewer marbles).
+
+Here is a code snippet (not an executable program) from the `move()` method of the `Marble` class:
 ```javascript
 // Example 5.1.3
 
@@ -137,8 +139,9 @@ and here is a code snippet (not an executable program) from the `move()` method 
 
         this.counter ++
 ```
+This snippet should help with understanding the function of the `Duration` column times.
 
-The randomization of the falling marble sets (1 marble, 2 marbles, etc) in the main loop of the `bouncing_marbles` function has three main steps:
+Finally, the randomization of the falling marble sets (1 marble, 2 marbles, etc) in the main loop of the `bouncing_marbles` function has three main steps:
 1. First, a `numMarbles` is assigned a random number by `randint(1, 5)`.  
 2. Secong, in a loop with a modulus mechanism, `numMarbles` `Marble` objects are created with random brightness and speced out randomly. This creates the impression that the marbles are _"realeased"_ at differen times.  
 3. The marbles, which are kept in an array, have their `move()` method called until they are done with their trajectories, at which time they are deleted.

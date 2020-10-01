@@ -207,21 +207,34 @@ The main encapsulation features of computer programming languages, and also avai
 
 Functions encapsulate `[<cept>]`_code_. 
 
+**TODO** input-output contract
+
 ##### Classes
 
-Classes encapsulate `[<cept>]` code and data into `[<cept>]`_objects_ of programmer-defined `[<cept>]`_data types_. **TODO** why data AND code? because a type allows some operations and not others, thus making code a part of the definition of the type
+Classes encapsulate code and data into `[<cept>]`_objects_ of programmer-defined `[<cept>]`_data types_. The term `[<cept>]`_class_ is synonymous with the term `[<cept>]`_type_, and the two terms are frequently used interchangeably. 
+
+We know data have types. So, why do classes also encapsulate code along with the data? Because a type allows some operations and not others, thus making code a part of the definition of the type. For example, integers and strings allow completely different operations. Their operation sets are actually completely `[<cept>]`_disjoint_. The overloaded `+` operator does not change that, since it means _addition_ for integers and _concatenation_ for strings. We cannot meaningfully add strings the way we add integers, nor concatenate integers the way we concatenate strings. The `[<cept>]`_class methods_ comprise an exhaustive set of the operations that can be applied to objects of the class (aka type). In fact, the methods are a stronger determinant of the type than the data fields, as those can be changed without changing the input-output contract of the methods.
 
 ##### Namespaces
 
-Namespaces encapsulate data, functions, and classes.
+Namespaces encapsulate data, functions, and types (classes, `enum`, etc).
 
 (`basic`, `input`, `game`; also `Math`)
 
 #### 2. Apply
 [[toc](#table-of-contents)]
+
+**TODO** Getters and setters
+
+**TODO** Screensavers encapsulation...
+
+**TODO** Challenge: Class for binary numbers as strings!!!
+
 #### 3. Present
 [[toc](#table-of-contents)]
-   
+
+
+
 ### 7. Functions revisited  
 [[toc](#table-of-contents)]
 
@@ -250,8 +263,13 @@ Namespaces encapsulate data, functions, and classes.
 
 #### 2. Apply
 [[toc](#table-of-contents)]
+
+**TODO** Recursive functions...
+
 #### 3. Present
 [[toc](#table-of-contents)]
+   
+   
    
 ### 8. Classes revisited    
 [[toc](#table-of-contents)]
@@ -269,6 +287,24 @@ Namespaces encapsulate data, functions, and classes.
 
 #### 2. Apply
 [[toc](#table-of-contents)]
+
+1. `[<lernact-prac>]`In a namespece `Complex`:
+   1. Write a class to represent `[<cept>]`[_complex numbers_](https://www.mathsisfun.com/numbers/complex-numbers.html), called `ComplexNumber`.  
+   2. Implement the function `Complex.add(a : ComplexNumber, b : ComplexNumber) : ComplexNumber`.   
+   3. Implement the function `Complex.conjugate(a : ComplexNumber) : ComplexNumber`.   
+   4. Implement the function `Complex.multiply(a : ComplexNumber, b : ComplexNumber) : ComplexNumber`.   
+   5. Implement the function `Complex.showComplex(c : ComplexNumber) : void` to scroll a complex number as a string (e.g. `"-14-i31"`, `i`, `-i6`, `4+i7`, etc.).  
+2. `[<lernact-prac>]`Using the `ComplexNumber` and the `Complex` methods, define the numbers `6+i7` and `-8-i5`, and:
+   1. Add them. The program should scroll the first number, then show `+` for 500 ms, then scroll the second number, then show `=` for 500 ms, and finally scroll the result. _Note that you cannot use `scrollString` for the plus. You will have to define your own icon `Plus`._  
+   2. Find their conjugates. For each number, the program should scroll the number, then show `C` for 500 ms, and finally scroll the result. _See the previous note._   
+   3. Multiply them. The program should scroll the first number, then show a custon icon `Mult` (a X centered at (2, 2) and spanning the 3x3 square with origin at (1, 1)) for 500 ms, then scroll the second number, then show `=` for 500 ms, and finally scroll the result.  
+3. `[<lernact-prac>]`**[Optional challenge, max 10 extra step points]** In the namespace `Complex`:
+  1. Write a class to represent `[<cept>]`_fractions_, called `Fraction`. Fractions should show in their `[<cept>]`_reduced form_. If a `Fraction` object is defined in `[<cept>]`_irreduced form_, it should be reduced internally in the constructor. 
+  2. Implement the function `Complex.showFraction(f : ComplexNumber) : void` to scroll a reduced fraction as a string (e.g. `"15/16"`, `7`, `13/14`, `9/5`, etc.).  
+  3. Modify your `ComplexNumber` class to work with fractions instead of `[<cept>]`[_continuous real and imaginary coefficients_](https://proofwiki.org/wiki/Real_and_Imaginary_Part_Projections_are_Continuous). If the `[<cept>]`_real_ or `[<cept>]`_imaginary_ part of the a complex is an irreducible fraction, show the number with fractional (not continous real) `[<cept>]`_coefficients_.  
+  4. Modify your `showComplex` function to show complex numbers with integers or fractional coefficients (e.g. `12/13+i4/7`, `-14-i31`, `9/5-i7`, etc.).  
+  5. Divide `6+i7` by `-8-i5`. The program should scroll the first number, then show a custon icon `Div` (a / centered at (2, 2) and spanning the 3x3 square with origin at (1, 1)) for 500 ms, then scroll the second number, then show `=` for 500 ms, and finally scroll the result. _Note the result has to be in the canonical form A + iB, where A and B are either integers or fractions._    
+
 #### 3. Present
 [[toc](#table-of-contents)]
    

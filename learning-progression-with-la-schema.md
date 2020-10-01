@@ -197,10 +197,21 @@ In the [Lab Notebook](README.md):
 #### 1. Study
 [[toc](#table-of-contents)]
 
-   - the benefits of encapsulation  
-   - functions
-   - classes   
-   - namespaces (`basic`, `input`, `game`, etc.)    
+##### Benefits of encapsulation  
+
+`[<lernact-rd>]``[<cept>]`_Encapsulation_, in computer programming, is the enclosing of computational artifacts (data and code) into _named_ containers (here meaning distinct program regions) for the purpose of avoiding code duplication, program structuring and organization, and abstraction and simplification of the top-level program loop. Encapsulation is a widely used engineering principle, allowing practitioners to implement and users to utilize technology without knowing all the details. It is the greatest way to decrease the `[<cept>]`_cognitive load_ of both engineering work and technology usage.
+
+The main encapsulation features of computer programming languages, and also available in the single-file MakeCode programming environment for the micro:bit, are `[<cept>]`_functions_, `[<cept>]`_classes_, and `[<cept>]`_namespaces_. Other environments allow for multi-file programs, thus making files part of the encapsulation and abstraction hierarchy of functions, classes, and namespaces. Other languages additionally organizing programs into `[<cept>]`_modules_, `[<cept>]`_packages_, and other top-level structural elements.
+
+##### Functions
+
+Functions encapsulate `[<cept>]`_code_. 
+
+##### Classes
+
+##### Namespaces
+
+(`basic`, `input`, `game`, etc.)    
 
 #### 2. Apply
 [[toc](#table-of-contents)]

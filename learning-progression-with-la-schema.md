@@ -209,9 +209,13 @@ Functions encapsulate `[<cept>]`_code_.
 
 ##### Classes
 
+Classes encapsulate `[<cept>]` code and data into `[<cept>]`_objects_ of programmer-defined `[<cept>]`_data types_. **TODO** why data AND code? because a type allows some operations and not others, thus making code a part of the definition of the type
+
 ##### Namespaces
 
-(`basic`, `input`, `game`, etc.)    
+Namespaces encapsulate data, functions, and classes.
+
+(`basic`, `input`, `game`; also `Math`)
 
 #### 2. Apply
 [[toc](#table-of-contents)]

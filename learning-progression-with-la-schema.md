@@ -224,7 +224,7 @@ Namespaces encapsulate data, functions, and types (classes, `enum`, etc).
 #### 2. Apply
 [[toc](#table-of-contents)]
 
-**TODO** Getters and setters
+**TODO** [Getters and setters](https://developer.mozilla.org/en-US/docs/Learn/JavaScript/Objects/Inheritance#Getters_and_Setters)  
 
 **TODO** Screensavers encapsulation...
 

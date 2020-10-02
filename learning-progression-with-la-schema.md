@@ -286,15 +286,40 @@ Notice the `export` keyword in front of the `showNumber`. This is what allows co
    6. The class `Raindrop` should _not_ be exported.  
    7. The class `Marble` should _not_ be exported.  
    8. Any global data and code necessary for the main loop should remain outside of the namespace (e.g. the type `enum Mode`, the variables of type `Gesture` and `Gesture[]`, etc.).  
-2. `[<lernact-prac>]`**TODO** Challenge: Class for binary numbers as strings!!! Two dots as a subscript indicating a binary string (`00011..`), but need to use animation!
-```javascript
-basic.showAnimation(
-`0 0 0 0 0 0 0 0 0 0 0 0 1 0 0 0 1 1 1 0 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 0 1 1 1 0 0 0 1 0 0 0 0 0
- 0 0 0 0 0 0 0 1 0 0 0 1 1 1 0 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 0 1 1 1 0 0 0 1 0 0 0 0 0 0 0 0 0 0
- 0 0 1 0 0 0 1 1 1 0 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 0 1 1 1 0 0 0 1 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
- 0 0 0 0 0 0 0 1 0 0 0 1 1 1 0 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 0 1 1 1 0 0 0 1 0 0 0 0 0 0 0 0 0 0
- 0 0 0 0 0 0 0 0 0 0 0 0 1 0 0 0 1 1 1 0 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 0 1 1 1 0 0 0 1 0 0 0 0 0`)
-```
+2. `[<lernact-prac>]`**[Optional challenge, max 10 extra step points]** Write a class to represent `[<cept>]`_unsigned_ binary integers as strings (e.g. `00011..` is 3<sub>10</sub>), called `UnsignedBinary`. Specifically:
+   1. The strings contain two dots at the end as a subscript indicating the number is in binary.  
+   2. The binary strings are at most 16 bits long (not counting the subscript).  
+   3. The constructor takes a string `constructor(bin_str : string, carry : boolean)` and:  
+      1. Rejects any characters that are not `0` or `1`. _Read the section on [exceptions](#exceptions)._  
+      2. Calculates and stores the numerical value of the string. _Use **sum of powers**._ 
+      3. Adds any leading zeros needed to complete the bit length to 16.  
+      4. Stores the copy of the string with the suffix appended.  
+      5. Stores the Boolean argument `carry`. (See the next points.)  
+   4. The function `carry() : boolean` is implemented with the following specifications:
+      1. It reports the value of an internal field which is `true` when the integer has overflowed and `false` otherwise. 
+      2. An integer may overflow if it is a result of addition which has overflowed (e.g. `0001..` + `1111..` will overflow, so the result is `0000` and the carry is `true`; on the other hand, `0011..` + `0001` will not overflow so the result is `0111` and the carry is `false`).  
+   4. The function `add(bi : BinaryInteger) : BinaryInteger` is implemented with the following specifications:
+      1. It is called on a `BinaryInteger`, takes a second `BinaryInteger` as argument, and returns a `BinaryInteger`.  
+      2. The returned object is a 16-bit result, with carry (if it overflows). 
+      3. Addition in binary works as follows:  
+         1. 0<sub>2</sub> + 0<sub>2</sub> = 0<sub>2</sub>.   
+         2. 0<sub>2</sub> + 1<sub>2</sub> = 1<sub>2</sub>.   
+         3. 1<sub>2</sub> + 0<sub>2</sub> = 10<sub>2</sub>.   
+         4. 1<sub>2</sub> + 1<sub>2</sub> = 11<sub>2</sub>.   
+   5. The function `show() : void` is implemented with the following specifications:
+      1. It scrolls the binary string without the suffix.  
+      2. Then, scrolls the suffix as two dots. Implement it with the animation feature of the micro:bit. Study the following example to find out how to do it:
+         ```javascript
+         // Example 6.1.3
+         
+         basic.showAnimation(
+         `0 0 0 0 0 0 0 0 0 0 0 0 1 0 0 0 1 1 1 0 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 0 1 1 1 0 0 0 1 0 0 0 0 0
+          0 0 0 0 0 0 0 1 0 0 0 1 1 1 0 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 0 1 1 1 0 0 0 1 0 0 0 0 0 0 0 0 0 0
+          0 0 1 0 0 0 1 1 1 0 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 0 1 1 1 0 0 0 1 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+          0 0 0 0 0 0 0 1 0 0 0 1 1 1 0 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 0 1 1 1 0 0 0 1 0 0 0 0 0 0 0 0 0 0
+          0 0 0 0 0 0 0 0 0 0 0 0 1 0 0 0 1 1 1 0 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 0 1 1 1 0 0 0 1 0 0 0 0 0`)
+         ```
+  
 (blocks of 5x5)
 
 #### 3. Present
@@ -365,7 +390,12 @@ In the [Lab Notebook](README.md):
      - prototypes (too much)  
      - JS vs TS  
    - [Getters and setters](https://developer.mozilla.org/en-US/docs/Learn/JavaScript/Objects/Inheritance#Getters_and_Setters)  
+   - defining a type:
+     - data  
+     - methods  
+     - exceptions  
 
+##### Exceptions
 
 #### 2. Apply
 [[toc](#table-of-contents)]
@@ -381,11 +411,11 @@ In the [Lab Notebook](README.md):
    2. Find their conjugates. For each number, the program should scroll the number, then show `C` for 500 ms, and finally scroll the result. _See the previous note._   
    3. Multiply them. The program should scroll the first number, then show a custon icon `Mult` (a X centered at (2, 2) and spanning the 3x3 square with origin at (1, 1)) for 500 ms, then scroll the second number, then show `=` for 500 ms, and finally scroll the result.  
 3. `[<lernact-prac>]`**[Optional challenge, max 10 extra step points]** In the namespace `Complex`:
-  1. Write a class to represent `[<cept>]`_fractions_, called `Fraction`. Fractions should show in their `[<cept>]`_reduced form_. If a `Fraction` object is defined in `[<cept>]`_irreduced form_, it should be reduced internally in the constructor. 
-  2. Implement the function `Complex.showFraction(f : ComplexNumber) : void` to scroll a reduced fraction as a string (e.g. `"15/16"`, `7`, `13/14`, `9/5`, etc.).  
-  3. Modify your `ComplexNumber` class to work with fractions instead of `[<cept>]`[_continuous real and imaginary coefficients_](https://proofwiki.org/wiki/Real_and_Imaginary_Part_Projections_are_Continuous). If the `[<cept>]`_real_ or `[<cept>]`_imaginary_ part of the a complex is an irreducible fraction, show the number with fractional (not continous real) `[<cept>]`_coefficients_.  
-  4. Modify your `showComplex` function to show complex numbers with integers or fractional coefficients (e.g. `12/13+i4/7`, `-14-i31`, `9/5-i7`, etc.).  
-  5. Divide `6+i7` by `-8-i5`. The program should scroll the first number, then show a custon icon `Div` (a / centered at (2, 2) and spanning the 3x3 square with origin at (1, 1)) for 500 ms, then scroll the second number, then show `=` for 500 ms, and finally scroll the result. _Note the result has to be in the canonical form A + iB, where A and B are either integers or fractions._    
+   1. Write a class to represent `[<cept>]`_fractions_, called `Fraction`. Fractions should show in their `[<cept>]`_reduced form_. If a `Fraction` object is defined in `[<cept>]`_irreduced form_, it should be reduced internally in the constructor. 
+   2. Implement the function `Complex.showFraction(f : ComplexNumber) : void` to scroll a reduced fraction as a string (e.g. `"15/16"`, `7`, `13/14`, `9/5`, etc.).  
+   3. Modify your `ComplexNumber` class to work with fractions instead of `[<cept>]`[_continuous real and imaginary coefficients_](https://proofwiki.org/wiki/Real_and_Imaginary_Part_Projections_are_Continuous). If the `[<cept>]`_real_ or `[<cept>]`_imaginary_ part of the a complex is an irreducible fraction, show the number with fractional (not continous real) `[<cept>]`_coefficients_.  
+   4. Modify your `showComplex` function to show complex numbers with integers or fractional coefficients (e.g. `12/13+i4/7`, `-14-i31`, `9/5-i7`, etc.).  
+   5. Divide `6+i7` by `-8-i5`. The program should scroll the first number, then show a custon icon `Div` (a / centered at (2, 2) and spanning the 3x3 square with origin at (1, 1)) for 500 ms, then scroll the second number, then show `=` for 500 ms, and finally scroll the result. _Note the result has to be in the canonical form A + iB, where A and B are either integers or fractions._    
 
 #### 3. Present
 [[toc](#table-of-contents)]

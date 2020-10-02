@@ -153,7 +153,7 @@ You may notice that when `while` loops instead of `basic.forever` for the main l
 
 ##### Thread unsafety
 
-While we will cover `[<cept>]`_threads_ (that is, _execution threads_), `[<cept>]`_multithreading_, and `[<cept>]`_thread safety_ in a later step, we need to mention that you may encounter the [micro:bit error code](https://makecode.microbit.org/device/error-codes) 980 (`undefined`) when all of a sudden the program tries to call the `move()` method on a `null` (that is, undefined) `Marble` object. _(Error codes are shown on the LED matrix by first showing a sad/frowny face icon and then scrolling the error number.)_ This is most likely caused by the _"thread unsafety"_ of the micro:bit and is not your fault. In short, the micro:bit has a task scheduler which breaks up longer code blocks into smaller portions to execute, alternating among several so broken-up code sequences. The ordering is somewhat random, which may cause portions of your program to run in the wrong order, relative to the order that you designed them to run in per your program structure.
+While we will cover `[<cept>]`_threads_ (that is, _execution threads_), `[<cept>]`_multithreading_, and `[<cept>]`_thread safety_ in a later step, we need to mention that you may encounter the [micro:bit error code](https://makecode.microbit.org/device/error-codes) 980 (`undefined`) when all of a sudden the program tries to call the `move()` method on a `null` (that is, undefined) `Marble` object. _(Error codes are shown on the LED matrix by first showing a `IconNames.Sad` and then scrolling the error number.)_ This is most likely caused by the _"thread unsafety"_ of the micro:bit and is not your fault. In short, the micro:bit has a task scheduler which breaks up longer code blocks into smaller portions to execute, alternating among several so broken-up code sequences. The ordering is somewhat random, which may cause portions of your program to run in the wrong order, relative to the order that you designed them to run in per your program structure.
 
 #### 2. Apply
 [[toc](#table-of-contents)]
@@ -217,18 +217,76 @@ We know data have types. So, why do classes also encapsulate code along with the
 
 ##### Namespaces
 
-Namespaces encapsulate data, functions, and types (classes, `enum`, etc).
+Namespaces encapsulate data, functions, and types (classes, `enum`, etc). Namespaces are just _named blocks_ (aka _named scopes_), and are declared as follows:
+```javascript
+// Example 6.1.1
 
-(`basic`, `input`, `game`; also `Math`)
+namespace screensaver {
+    // code and data, encapsulated in the namespace
+    // some of it may be exported (see the next example)
+}
+```
+Everything inside the curly braces `{}` is part of the namespace. A namespace is a `[<cept>]`_nested scope_. The `screensaver` namespace is nested in the top-level (aka `[<cept>]`_global_) scope.  
+
+The "packages" of functions in the MakeCode environment (e.g. `basic`, `input`, `leds`, etc.) are all namespaces. If you are curious, you can explore the code of the [core MakeCode library](https://github.com/microsoft/pxt-microbit/tree/master/libs/core). The programming languages in which the files are written can most often be inferred from their `[<cept>]`_file extensions_:
+1. `.ts` stands for TypeScript. _Remember that what we are programming in MakeCode is actually [TypeScript](https://makecode.com/language), despite calling it JavaScript._  
+2. `.cpp` stands for C++.  
+3. `.h` stands for header file (in C and C++).  
+4. `.json` stands for JSON, a simple data format.  
+5. `.jres` stands for a JSON file where project resources are stored.  
+6. `.s` stands for assembly.  
+
+Here is part of the `basic` namespace, contained in the [basic.ts](https://github.com/microsoft/pxt-microbit/blob/master/libs/core/basic.ts) file in the MakeCode codebase. The rest is in [basic.cpp](https://github.com/microsoft/pxt-microbit/blob/master/libs/core/basic.cpp), which is written in C++ and you don't have to read it.
+```javascript
+// Example 6.1.2
+
+namespace basic {
+
+    /**
+     * Scroll a number on the screen. If the number fits on the screen (i.e. is a single digit), do not scroll.
+     * @param interval speed of scroll; eg: 150, 100, 200, -100
+     */
+    //% help=basic/show-number
+    //% weight=96
+    //% blockId=device_show_number block="show|number %number" blockGap=8
+    //% async
+    //% parts="ledmatrix" interval.defl=150
+    export function showNumber(value: number, interval?: number) {
+        showString(Math.roundWithPrecision(value, 2).toString(), interval);
+    }
+}
+
+/**
+ * Pause for the specified time in milliseconds
+ * @param ms how long to pause for, eg: 100, 200, 500, 1000, 2000
+ */
+function pause(ms: number): void {
+    basic.pause(ms);
+}
+
+/**
+ * Repeats the code forever in the background. On each iteration, allows other codes to run.
+ * @param body code to execute
+ */
+function forever(a: () => void): void {
+    basic.forever(a);
+}
+```
+Notice the `export` keyword in front of the `showNumber`. This is what allows code outside the namespace to be called by prefixing the function name with the name of the namespace. You can see this in the declarations to `pause` and `forever`, which call `basic.pause` and `basic.forever`, respectively. Incidentally, this is why you can use `basic.forever` and `forever`, as well as `basic.pause` and `pause`, to get the same results.
 
 #### 2. Apply
 [[toc](#table-of-contents)]
 
-**TODO** [Getters and setters](https://developer.mozilla.org/en-US/docs/Learn/JavaScript/Objects/Inheritance#Getters_and_Setters)  
-
-**TODO** Screensavers encapsulation...
-
-**TODO** Challenge: Class for binary numbers as strings!!! Two dots as a subscript indicating a binary string (`00011..`), but need to use animation!
+1. `[<lernact-prac>]`Encasulate your screensaver code in a namespace `screensaver` so that the only code that is outside is the main program loop, which calls functions exported by the namespace. In particular:
+   1. The function `coding()` should be exported.  
+   2. The function `rain()` should be exported.  
+   3. The function `freqBars()` should be exported.  
+   4. The function `bouncing_marbles()` should be exported.  
+   5. Any global data necessary for the screensaver or working functions should be _encapsulated in the functions_.  
+   6. The class `Raindrop` should _not_ be exported.  
+   7. The class `Marble` should _not_ be exported.  
+   8. Any global data and code necessary for the main loop should remain outside of the namespace (e.g. the type `enum Mode`, the variables of type `Gesture` and `Gesture[]`, etc.).  
+2. `[<lernact-prac>]`**TODO** Challenge: Class for binary numbers as strings!!! Two dots as a subscript indicating a binary string (`00011..`), but need to use animation!
 ```javascript
 basic.showAnimation(
 `0 0 0 0 0 0 0 0 0 0 0 0 1 0 0 0 1 1 1 0 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 0 1 1 1 0 0 0 1 0 0 0 0 0
@@ -242,6 +300,15 @@ basic.showAnimation(
 #### 3. Present
 [[toc](#table-of-contents)]
 
+In the [programs](programs) directory:
+1. Add your program from 6.2.1 with filename `microbit-program-6-2-1.js`.  
+2. Add your program from 6.2.2 with filename `microbit-program-6-2-2.js`.  
+
+In the [Lab Notebook](README.md):
+1. Link to the program from 6.2.1.  
+2. Link to a demo video showing the execution of the program from 6.2.1.  
+3. Link to the program from 6.2.2.  
+4. Link to a demo video showing the execution of the program from 6.2.2.  
 
 
 ### 7. Functions revisited  
@@ -265,22 +332,26 @@ basic.showAnimation(
          basic.showNumber(value)    
      })
      ```  
+   - Input-output contract  
    - Function signatures & usage  
      - return a value  
      - return a modified argument  
      - change in place  
+   - naming  
+   - recursive functions  
 
 #### 2. Apply
 [[toc](#table-of-contents)]
 
-**TODO** Recursive functions...
+**TODO** Sort an array...
+**TODO** Recursive functions... (Towers of Hanoi)
 
 #### 3. Present
 [[toc](#table-of-contents)]
    
    
    
-### 8. Classes revisited    
+### 8. Classes revisited
 [[toc](#table-of-contents)]
 
 #### 1. Study
@@ -293,6 +364,8 @@ basic.showAnimation(
      - [Static TS](https://www.microsoft.com/en-us/research/publication/static-typescript/) implementation  
      - prototypes (too much)  
      - JS vs TS  
+   - [Getters and setters](https://developer.mozilla.org/en-US/docs/Learn/JavaScript/Objects/Inheritance#Getters_and_Setters)  
+
 
 #### 2. Apply
 [[toc](#table-of-contents)]

@@ -2,39 +2,6 @@
 
 This is learning progression 003 for the Fall 2020 installment of the course CPE 1040: Introduction to Computer Engineering at MSU Denver.
 
-Table of Contents
-=================
-
-* [CPE 1040 \- Fall 2020](#cpe-1040---fall-2020)
-  * [Learning Progression 003: Screensavers (Part 2)](#learning-progression-003-screensavers-part-2)
-    * [5\. Randomized behavior](#5-randomized-behavior)
-      * [1\. Study](#1-study)
-        * [Importance of randomization](#importance-of-randomization)
-        * [Pseudorandom numbers](#pseudorandom-numbers)
-        * [Random functions](#random-functions)
-        * [Randomization in the target program](#randomization-in-the-target-program)
-        * [Bouncing marbles](#bouncing-marbles)
-        * [Simulator infidelity](#simulator-infidelity)
-        * [Thread unsafety](#thread-unsafety)
-      * [2\. Apply](#2-apply)
-      * [3\. Present](#3-present)
-    * [6\. Encapsulation](#6-encapsulation)
-      * [1\. Study](#1-study-1)
-        * [Benefits of encapsulation](#benefits-of-encapsulation)
-        * [Functions](#functions)
-        * [Classes](#classes)
-        * [Namespaces](#namespaces)
-      * [2\. Apply](#2-apply-1)
-      * [3\. Present](#3-present-1)
-    * [7\. Functions revisited](#7-functions-revisited)
-      * [1\. Study](#1-study-2)
-      * [2\. Apply](#2-apply-2)
-      * [3\. Present](#3-present-2)
-    * [8\. Classes revisited](#8-classes-revisited)
-      * [1\. Study](#1-study-3)
-        * [Exceptions](#exceptions)
-      * [2\. Apply](#2-apply-3)
-      * [3\. Present](#3-present-3)
       
 
 ## Learning Progression 003: Screensavers (Part 2)
@@ -379,41 +346,58 @@ In the [Lab Notebook](README.md):
 #### 1. Study
 [[toc](#table-of-contents)]
 
-   - Pass by value, pass by reference  
-     ```javascript
-     let arr : number[] = [1, 2, 3]
-
-     function double(a : number[]) {
-         for (let i = 0; i < arr.length; i ++)
-             a[i] *= 2
-     }
-
-     double(arr)
-
-     arr.forEach(function (value: number, index: number) {
-         basic.showNumber(value)    
-     })
-     ```  
-   - Input-output contract  
+##### Input-output contract  
+**TODO**
    - Parameters & arguments  
-   - Pass by value & pass by reference  
-     - how to know
    - Function signatures & usage  
      - return a value  
      - return a modified argument  
      - change in place  
-   - naming  
-   - recursive functions  
+
+##### Pass by value vs pass by reference  
+**TODO**
+```javascript
+   let arr : number[] = [1, 2, 3]
+
+   function double(a : number[]) {
+       for (let i = 0; i < arr.length; i ++)
+           a[i] *= 2
+   }
+
+   double(arr)
+
+   arr.forEach(function (value: number, index: number) {
+       basic.showNumber(value)    
+   })
+   ```  
+- how to tell
+   
+##### Function naming
+**TODO**
+~ religion :D
+
+##### Recursive functions  
+**TODO**
+Functions calling themselves! Yes, the signature is known by the time the first self call is made, so this is allowed, and also frequently used.  
 
 #### 2. Apply
 [[toc](#table-of-contents)]
 
-**TODO** Sort an array...
-**TODO** Recursive functions... (Towers of Hanoi)
+1. `[<lernact-prac>]`**TODO** Sort an array with `BubbleSort`.    
+2. `[<lernact-prac>]`**[Optional challenge, max 5 extra step points]** **TODO** Design and implement the game [Tower of Hanoi](https://en.wikipedia.org/wiki/Tower_of_Hanoi) and a recursive solution. [Practice](https://www.mathsisfun.com/games/towerofhanoi.html) to get an intuition.    
 
 #### 3. Present
 [[toc](#table-of-contents)]
    
+In the [programs](programs) directory:
+1. Add your program from 7.2.1 with filename `microbit-program-7-2-1.js`.  
+2. Add your program from 7.2.2 with filename `microbit-program-7-2-2.js`.  
+
+In the [Lab Notebook](README.md):
+1. Link to the program from 7.2.1.  
+2. Link to a demo video showing the execution of the program from 7.2.1.  
+3. Link to the program from 7.2.2.  
+4. Link to a demo video showing the execution of the program from 7.2.2.  
    
    
 ### 8. Classes revisited

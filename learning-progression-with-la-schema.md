@@ -205,9 +205,40 @@ The main encapsulation features of computer programming languages, and also avai
 
 ##### Functions
 
-Functions encapsulate `[<cept>]`_code_. 
+Functions encapsulate `[<cept>]`_code_. They are `[<cept>]`_declared_ as _named executable_ sub-programs. A function's name allows the function to execute when when it is `[<cept>]`_called_. A functions operation can be `[<cept>]`_parameterized_, that is, the data they operate on can be abstracted. When a parameterized function is called, the caller specifies `[<cept>]`_arguments_, that is, data for all function parameters. Functions can also return a single instance of any data type. This makes functions encapsulated sub-programs which have input and output. Functions are said to define an `[<cept>]`_input-output contract_. This contract is said to be a function's `[<cept>]`_invariant_. The first line of a function, the one that specifies its parameters and return type, is called a `[<cept>]`_signature_. In JavaScript, functions are `[<cept>]`_first-class citizens_, meaning they can be used everywhere variables are used.  
 
-**TODO** input-output contract
+```javascript
+// Example 6.1.1
+
+function add(a : number, b : number) : number {     // <-- signature
+    return a + b                                    // <-- body
+}
+
+function randint(min : number, max : number) : number {
+    return min + Math.floor(Math.random() * (max + 1 - min))
+}
+
+function pause(ms : number) : void {               // <-- no return value
+    fiber_sleep(ms)
+}
+
+function randomPrime() : number {                  // <-- no parameters
+    return primes[randint(0, primes.length-1)]
+}
+
+basic.forever(function () {                        // <-- a function without parameters or return value passed as the argument to another function
+                               led.plot(2, 2); pause(100); led.unplot(2, 2); pause(100); 
+                          }
+             )
+
+basic.forever(() =>       {                        // <-- equivalent to previous 
+                               led.plot(2, 2); pause(100); led.unplot(2, 2); pause(100); 
+                          }
+             )
+
+// and, in typical JS shorthand:
+basic.forever(() => { led.plot(2, 2); pause(100); led.unplot(2, 2); pause(100); })
+```
 
 ##### Classes
 
@@ -219,7 +250,7 @@ We know data have types. So, why do classes also encapsulate code along with the
 
 Namespaces encapsulate data, functions, and types (classes, `enum`, etc). Namespaces are just _named blocks_ (aka _named scopes_), and are declared as follows:
 ```javascript
-// Example 6.1.1
+// Example 6.1.2
 
 namespace screensaver {
     // code and data, encapsulated in the namespace
@@ -238,7 +269,7 @@ The "packages" of functions in the MakeCode environment (e.g. `basic`, `input`, 
 
 Here is part of the `basic` namespace, contained in the [basic.ts](https://github.com/microsoft/pxt-microbit/blob/master/libs/core/basic.ts) file in the MakeCode codebase. The rest is in [basic.cpp](https://github.com/microsoft/pxt-microbit/blob/master/libs/core/basic.cpp), which is written in C++ and you don't have to read it.
 ```javascript
-// Example 6.1.2
+// Example 6.1.3
 
 namespace basic {
 
@@ -298,19 +329,20 @@ Notice the `export` keyword in front of the `showNumber`. This is what allows co
    4. The function `carry() : boolean` is implemented with the following specifications:
       1. It reports the value of an internal field which is `true` when the integer has overflowed and `false` otherwise. 
       2. An integer may overflow if it is a result of addition which has overflowed (e.g. `0001..` + `1111..` will overflow, so the result is `0000` and the carry is `true`; on the other hand, `0011..` + `0001` will not overflow so the result is `0111` and the carry is `false`).  
-   4. The function `add(bi : BinaryInteger) : BinaryInteger` is implemented with the following specifications:
+   5. The function `add(bi : BinaryInteger) : BinaryInteger` is implemented with the following specifications:
       1. It is called on a `BinaryInteger`, takes a second `BinaryInteger` as argument, and returns a `BinaryInteger`.  
       2. The returned object is a 16-bit result, with carry (if it overflows). 
-      3. Addition in binary works as follows:  
+      3. [Addition in binary](https://www.khanacademy.org/math/algebra-home/alg-intro-to-algebra/algebra-alternate-number-bases/v/binary-addition) works as follows:  
          1. 0<sub>2</sub> + 0<sub>2</sub> = 0<sub>2</sub>.   
          2. 0<sub>2</sub> + 1<sub>2</sub> = 1<sub>2</sub>.   
-         3. 1<sub>2</sub> + 0<sub>2</sub> = 10<sub>2</sub>.   
-         4. 1<sub>2</sub> + 1<sub>2</sub> = 11<sub>2</sub>.   
-   5. The function `show() : void` is implemented with the following specifications:
+         3. 01<sub>2</sub> + 01<sub>2</sub> = 10<sub>2</sub>. _Note: Bit width grows by one._   
+         4. 10<sub>2</sub> + 01<sub>2</sub> = 11<sub>2</sub>.   
+         5. 011<sub>2</sub> + 001<sub>2</sub> = 100<sub>2</sub>. _Note: Bit width grows by one._   
+   6. The function `show() : void` is implemented with the following specifications:
       1. It scrolls the binary string without the suffix.  
       2. Then, scrolls the suffix as two dots. Implement it with the animation feature of the micro:bit. Study the following example to find out how to do it:
          ```javascript
-         // Example 6.1.3
+         // Example 6.1.4
          
          basic.showAnimation(
          `0 0 0 0 0 0 0 0 0 0 0 0 1 0 0 0 1 1 1 0 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 0 1 1 1 0 0 0 1 0 0 0 0 0
@@ -319,8 +351,7 @@ Notice the `export` keyword in front of the `showNumber`. This is what allows co
           0 0 0 0 0 0 0 1 0 0 0 1 1 1 0 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 0 1 1 1 0 0 0 1 0 0 0 0 0 0 0 0 0 0
           0 0 0 0 0 0 0 0 0 0 0 0 1 0 0 0 1 1 1 0 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 0 1 1 1 0 0 0 1 0 0 0 0 0`)
          ```
-  
-(blocks of 5x5)
+         _Hint: Blocks of 5x5._  
 
 #### 3. Present
 [[toc](#table-of-contents)]
@@ -358,6 +389,9 @@ In the [Lab Notebook](README.md):
      })
      ```  
    - Input-output contract  
+   - Parameters & arguments  
+   - Pass by value & pass by reference  
+     - how to know
    - Function signatures & usage  
      - return a value  
      - return a modified argument  

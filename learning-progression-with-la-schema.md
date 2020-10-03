@@ -444,7 +444,7 @@ It doesn't matter that much which one you use, as long as you are consistent. Th
 
 ##### Recursive functions  
 
-`[<lernact-rd>]`Functions can call themselves. Since the signature of the function is already known by the time any call can be made from inside the function block, that call can be to the same function. This is called `[<cept>]`_recursion_. Let's see an example:
+`[<lernact-rd>]`Functions can call themselves. Since the signature of the function is already known by the time any call can be made from inside the function block, that call can be to the same function. This is called `[<cept>]`[_recursion_](https://en.wikipedia.org/wiki/Recursion_(computer_science)). Let's see an example:
 ```javascript
 // Example 7.1.3
 
@@ -461,6 +461,8 @@ basic.showNumber(factorial(5))
 Notice the following main points:
 1. The recursive call is always with a "smaller" argument (e.g. a number minus one, or a subarray of the original array). The recursive call is solving a _smaller problem_.    
 2. There is always a `[<cept>]`_termination condition_, in our case when a equals 1. This is the _smallest possible problem_ and it terminates the recursive call chain. Forgetting a termination condition will most often result in what is called an `[<cept>]`_infinite loop_.  
+
+We need to note that recursive functions, while they look very elegant, are very wasteful of space (that is, memory), as they keep calling themselves until they reach the termination condition. All these copies of the function fill up the `[<cept>]`[_call stack_](https://medium.com/@ryanfarney/breaking-down-the-call-stack-e68b5633fbad), a special memory region that keeps function data for all outstanding function calls.    
 
 
 #### 2. Apply

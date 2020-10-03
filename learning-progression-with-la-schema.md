@@ -420,8 +420,23 @@ Functions calling themselves! Yes, the signature is known by the time the first 
 #### 2. Apply
 [[toc](#table-of-contents)]
 
-1. `[<lernact-prac>]`**TODO** Sort an array with `BubbleSort`.    
-2. `[<lernact-prac>]`**[Optional challenge, max 5 extra step points]** **TODO** Design and implement the game [Tower of Hanoi](https://en.wikipedia.org/wiki/Tower_of_Hanoi) and a recursive solution. [Practice](https://www.mathsisfun.com/games/towerofhanoi.html) to get an intuition.    
+1. `[<lernact-prac>]`Write a function `BubbleSort(arr : number[]) : void` to `[<cept>]`_sort_ `[<cept>]`_in place_ a numeric array, using the [Bubble Sort](https://en.wikipedia.org/wiki/Bubble_sort) algorithm. Requirements and notes:
+   1. The function should take an array of numbers and sort it _in place_, without creating a new array.  
+   2. The array should be sorted in `[<cept>]`_ascending_ order (e.g. `[1, 5, 17, 80, ...]`.  
+   3. The function should not return anything.  
+   4. There are two versions of Bubble Sort: [iterative and recursive](https://www.techiedelight.com/bubble-sort-iterative-recursive/). This function should implement an `[<cept>]`_iterative_ Bubble Sort. _Hint: The C syntax is closest to TypeScript, so you should read the C versions of the solutions in the referenced resource, for guidance._  
+   5. An `[<cept>]`_algorithm_ is an exact series of precise (computational) steps that solves a certain problem or a class of problems. `[<cept>]`_Sorting_ is one of the most often performed computational activity in the modern world and there are many [sorting algorithms](https://en.wikipedia.org/wiki/Sorting_algorithm). Bubble Sort is not an efficient algorithm and is therefore not used in practice. However, it is great for developing intuition about the problem to be solved. For further intuition, watch this short [YouTube video](https://www.youtube.com/watch?v=kPRA0W1kECg&t=130s).
+   6. Write a short program that uses your function. It should:
+      1. Scroll "Input:" and then the input array. The input array should be `[14, 19, 3, 2, 0, 56, 12, 7, 90, 1, 11]`.     
+      2. When done, it should scroll "Sorted:" and then the sorted array.  
+2. `[<lernact-prac]`**[Note: The solution to this problem will count for 2 extra step points]** Implement a _recursive_ `BubbleSort(arr : number[]) : void`. Run the same program you wrote to demo the iterative solution.  
+3. `[<lernact-prac>]`**[Optional challenge, max 10 extra step points]** Design and implement the game [Tower of Hanoi](https://en.wikipedia.org/wiki/Tower_of_Hanoi) and a recursive solution. [Practice](https://www.mathsisfun.com/games/towerofhanoi.html) to get an intuition. Requirements and notes:
+   1. Your program should be able to take a 3-peg game, with a tower of up to 7 stories at the leftmost peg, and solve it by moving the tower to the rightmost peg.  
+   2. Your program should use **recursion** to solve the game.  
+   3. Your program should have two display modes:  
+      1. One mode will only scroll the start and end configurations (e.g. for a 3-story tower, `321|0|0` and `0|0|321`).  
+      2. One that shows the start, all intermediate, and end configurations (e.g. for a 2-story tower, `21|0|0`, `2|1|0`, `0|1|2`,  and `0|0|21`).  
+   4. Your implementation - classes, functions, etc. - is up to you. _Try to use what you have learned so far._  
 
 #### 3. Present
 [[toc](#table-of-contents)]
@@ -429,12 +444,15 @@ Functions calling themselves! Yes, the signature is known by the time the first 
 In the [programs](programs) directory:
 1. Add your program from 7.2.1 with filename `microbit-program-7-2-1.js`.  
 2. Add your program from 7.2.2 with filename `microbit-program-7-2-2.js`.  
+2. Add your program from 7.2.3 with filename `microbit-program-7-2-3.js`.  
 
 In the [Lab Notebook](README.md):
 1. Link to the program from 7.2.1.  
 2. Link to a demo video showing the execution of the program from 7.2.1.  
 3. Link to the program from 7.2.2.  
 4. Link to a demo video showing the execution of the program from 7.2.2.  
+5. Link to the program from 7.2.3.  
+6. Link to a demo video showing the execution of the program from 7.2.3.  
    
    
 ### 8. Classes revisited

@@ -384,38 +384,84 @@ In the [Lab Notebook](README.md):
 [[toc](#table-of-contents)]
 
 ##### Input-output contract  
-**TODO**
-   - Parameters & arguments  
-   - Function signatures & usage  
-     - return a value  
-     - return a modified argument  
-     - change in place  
+`[<lernact-rd>]`The input-output contract of a function consists of the particular transformation of the input data (that is, the arguments) into the output data (that is, the return value). Even functions which do not return anything have an input-output contract, as they may be modifying internal data structures (e.g. class methods). Functions which do not take any arguments are often called `[<cept>]`_routines_.
+
+Formally, the input-output contract refers includes the number and types of function parameters as well as the type of the return value, if any. The shortest expression of the input-output contract is the function _signature_.
+
+The input-output contract of a function is an _invariant_, meaning that it is strictly fixed, and _does not change_ even when the specific implementation of the function changes. A function is thus an _encapsulation of an input-output contract_.
+
+Functions can also perform operations that are not strictly part of the input-output contract and are not otherwise explicitly stated. Such operations are therefore called `[<cept>]`_side effects_. Side effects relate to a very important feature of functional input-output contracts, namely that the latter guarantee that the program state is `[<cept>]`_consistent_ before and after the execution of a function (though it may briefly become inconsistent in the middle of its execution); side effects are potential holes in the input-output contract, and may introduce suble inconsistencies that are hard to trace and fix.  
 
 ##### Pass by value vs pass by reference  
-**TODO**
+
+`[<lernact-rd>]`An important aspect of functions is how the arguments are passed to the function through the function call. There are two ways:
+1. `[<cept>]`_Pass by value_ means that the value of the argument is a copy of the original variable (unless it is a _literal_ in which case it is not a copy of anything, for exmple the number `3`). In this case, the function can use the value but cannot modify the original variable. This method works for all `[<cept>]`_primitive_ data types.  
 ```javascript
-   let arr : number[] = [1, 2, 3]
+// Example 7.1.1
 
-   function double(a : number[]) {
-       for (let i = 0; i < arr.length; i ++)
-           a[i] *= 2
-   }
+let a : number = 2
 
-   double(arr)
+function double(n : number) : void {
+    n = 2*n
+}
 
-   arr.forEach(function (value: number, index: number) {
-       basic.showNumber(value)    
-   })
+basic.showNumber(a)
+double(a)
+basic.showNumber(a)  // a retains its value
+
+function double2(n : number) : number {
+    return 2*n
+}
+
+a = double2(a)
+basic.showNumber(a)  // only now does a change, because we assigned a new value to it
+```
+2. `[<cept>]`_Pass by reference_ means that the value of the argument is actually the `[<cept>]`_memory address_ of the data structure or object that is being passed. In this case, the function modifies the original variable. This method works for all arrays and class instances.  
+```javascript
+// Example 7.1.2
+
+let arr : number[] = [1, 2, 3]
+
+function double(a : number[]) : void {
+    for (let i = 0; i < arr.length; i ++)
+        a[i] *= 2
+    }
+
+double(arr)
+
+arr.forEach(function (value: number, index: number) {
+    basic.showNumber(value)                              // the elements of the array are now doubled!
+})
    ```  
-- how to tell
    
 ##### Function naming
-**TODO**
-~ religion :D
+
+`[<lernact-rd>]`The discourse about naming functions has the intensity of religious fervor, so we are only going to mention two very popular styles that we have already used:
+1. `[<cept>]`_Camel case_ capitalizes every word in the function name except the first one (e.g. `frequencyBars` and `freqBars`).  
+2. `[<cept>]`_Snake case_ is all lower-case and divides the words in the function name with underscores (e.g. `bouncing_marbles`).  
+
+It doesn't matter that much which one you use, as long as you are consistent. This said, we have been inconsistent in naming our screensavers, but only so that we can explicitly talk about these two function naming conventions.  
 
 ##### Recursive functions  
-**TODO**
-Functions calling themselves! Yes, the signature is known by the time the first self call is made, so this is allowed, and also frequently used.  
+
+`[<lernact-rd>]`Functions can call themselves. Since the signature of the function is already known by the time any call can be made from inside the function block, that call can be to the same function. This is called `[<cept>]`_recursion_. Let's see an example:
+```javascript
+// Example 7.1.3
+
+function factorial(a : number) : number {
+    if (a == 1) {
+        return 1
+    } else {
+        return a * factorial(a - 1)
+    }
+}
+
+basic.showNumber(factorial(5))
+```
+Notice the following main points:
+1. The recursive call is always with a "smaller" argument (e.g. a number minus one, or a subarray of the original array). The recursive call is solving a _smaller problem_.    
+2. There is always a `[<cept>]`_termination condition_, in our case when a equals 1. This is the _smallest possible problem_ and it terminates the recursive call chain. Forgetting a termination condition will most often result in what is called an `[<cept>]`_infinite loop_.  
+
 
 #### 2. Apply
 [[toc](#table-of-contents)]

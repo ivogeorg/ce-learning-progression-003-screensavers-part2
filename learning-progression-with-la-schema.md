@@ -2,6 +2,46 @@
 
 This is learning progression 003 for the Fall 2020 installment of the course CPE 1040: Introduction to Computer Engineering at MSU Denver.
 
+Table of Contents
+=================
+
+* [CPE 1040 \- Fall 2020](#cpe-1040---fall-2020)
+  * [Learning Progression 003: Screensavers (Part 2)](#learning-progression-003-screensavers-part-2)
+    * [5\. Randomized behavior](#5-randomized-behavior)
+      * [1\. Study](#1-study)
+        * [Importance of randomization](#importance-of-randomization)
+        * [Pseudorandom numbers](#pseudorandom-numbers)
+        * [Random functions](#random-functions)
+        * [Randomization in the target program](#randomization-in-the-target-program)
+        * [Bouncing marbles](#bouncing-marbles)
+        * [Simulator infidelity](#simulator-infidelity)
+        * [Thread unsafety](#thread-unsafety)
+      * [2\. Apply](#2-apply)
+      * [3\. Present](#3-present)
+    * [6\. Encapsulation](#6-encapsulation)
+      * [1\. Study](#1-study-1)
+        * [Benefits of encapsulation](#benefits-of-encapsulation)
+        * [Functions](#functions)
+        * [Classes](#classes)
+        * [Namespaces](#namespaces)
+      * [2\. Apply](#2-apply-1)
+      * [3\. Present](#3-present-1)
+    * [7\. Functions revisited](#7-functions-revisited)
+      * [1\. Study](#1-study-2)
+        * [Input\-output contract](#input-output-contract)
+        * [Pass by value vs pass by reference](#pass-by-value-vs-pass-by-reference)
+        * [Function naming](#function-naming)
+        * [Recursive functions](#recursive-functions)
+      * [2\. Apply](#2-apply-2)
+      * [3\. Present](#3-present-2)
+    * [8\. Classes revisited](#8-classes-revisited)
+      * [1\. Study](#1-study-3)
+        * [Classes are type definitions](#classes-are-type-definitions)
+        * [Exceptions](#exceptions)
+        * [Objects are dictionaries](#objects-are-dictionaries)
+        * [Getters and setters](#getters-and-setters)
+      * [2\. Apply](#2-apply-3)
+      * [3\. Present](#3-present-3)
 
 
 ## Learning Progression 003: Screensavers (Part 2)

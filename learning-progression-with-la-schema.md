@@ -589,16 +589,56 @@ So, `throw` works to give you minimal functionality to reject unsupported input 
 
 ##### Objects are dictionaries
 
-`[<lernact-rd>]`
-   - an anstract view of class fields and object properties  
-   - objects as dictionaries: object literal example
-   - in JS, [classes are functions under the hood](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Classes)  
-   - the implementation details of [Static TypeScript (STS)](https://www.microsoft.com/en-us/research/publication/static-typescript/)  
+`[<lernact-rd>]`Another way to look at classes is to focus on the objects themselves and realize that they are `[<cept>]`_dictionaries_. Dictionaries in computing are data structures which match `[<cept>]`_keys_ with `[<cept>]`_values_. They are also called `[<cept>]`_maps_ or `[<cept>]`_hash tables_, but they are just collections of data pairs. The value can be anything, literally anything, including the same value throughout the dictionary. However, the keys have to be `[<cept>]`_unique_. There cannot be two different key-value pairs with the same key.
+
+The keys of the objects are their field names (e.g. the `x`, `y`, and `b` of `BrightPoint` objects) and the values are their specific values, different for every object. This is the essence of objects - their independend `[<cept>]`_lifecycle_ - and correspondingly a very valid perspective on what classes are, as object templates. In fact, in JavaScript, this is the dominating perspective!
+
+If you want to read the implementation details of the JavaScript-like language that we use in MakeCode, called Static TypeScript (STS), read their [paper](https://www.microsoft.com/en-us/research/publication/static-typescript/). It's a fascinating read, once you get used to the terminology, and provides an enticing peek into the software stack of the micro:bit.  
+
 
 ##### Getters and setters
 
-`[<lernact-rd>]`
-   - [Getters and setters](https://developer.mozilla.org/en-US/docs/Learn/JavaScript/Objects/Inheritance#Getters_and_Setters)  
+`[<lernact-rd>]`In the line of the objects-as-dictionaries perspective on classes that we just discussed, we should mention a very common pattern for class methods, namely the so called `[<cept>]`[_getters and setters_](https://developer.mozilla.org/en-US/docs/Learn/JavaScript/Objects/Inheritance#Getters_and_Setters), (aka `get` and `set` accessors). These are methods with specific syntax that are just there to allow us to get and set the values in the "object dictionary". Here's an example:
+```javascript
+// Example 8.1.3
+
+class Point {
+    private _x : number
+    private _y : number
+
+    constructor(x : number, y : number) {
+        this._x = x
+        this._y = y
+    }
+
+    get x() {
+        return this._x
+    }
+
+    set x(new_x : number) {
+        this._x = new_x
+    }
+
+    get y() {
+        return this._y
+    }
+
+    set y(new_y : number) {
+        this._y = new_y
+    }
+}
+
+let p0 : Point = new Point(1, 2)
+
+basic.showNumber(p0.x)            // <-- call the getter of `_x`
+basic.pause(100)
+p0.x = 5                          // <-- call the setter of `_x`
+basic.showNumber(p0.x)
+```
+Notice the following:
+1. The `get` and `set` keywords.  
+2. The underscore in `_x` and `_y` to avoid duplicate names with the getters and setters of `x` and `y`.
+3. The `private` keyword in front of `_x` and `_y`, which disallows calls like `p0._x` (that is, direct access to the object fields). `[<cept>]`_Hiding_ the implementation of the functionality encapsulated in a class is the reason for the popularity of getters and setters in the first place. _The detailed considerations belong to the theory and history of object-oriented programming._      
 
 
 #### 2. Apply

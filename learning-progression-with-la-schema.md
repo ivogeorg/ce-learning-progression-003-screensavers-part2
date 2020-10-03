@@ -2,43 +2,6 @@
 
 This is learning progression 003 for the Fall 2020 installment of the course CPE 1040: Introduction to Computer Engineering at MSU Denver.
 
-Table of Contents
-=================
-
-* [CPE 1040 \- Fall 2020](#cpe-1040---fall-2020)
-  * [Learning Progression 003: Screensavers (Part 2)](#learning-progression-003-screensavers-part-2)
-    * [5\. Randomized behavior](#5-randomized-behavior)
-      * [1\. Study](#1-study)
-        * [Importance of randomization](#importance-of-randomization)
-        * [Pseudorandom numbers](#pseudorandom-numbers)
-        * [Random functions](#random-functions)
-        * [Randomization in the target program](#randomization-in-the-target-program)
-        * [Bouncing marbles](#bouncing-marbles)
-        * [Simulator infidelity](#simulator-infidelity)
-        * [Thread unsafety](#thread-unsafety)
-      * [2\. Apply](#2-apply)
-      * [3\. Present](#3-present)
-    * [6\. Encapsulation](#6-encapsulation)
-      * [1\. Study](#1-study-1)
-        * [Benefits of encapsulation](#benefits-of-encapsulation)
-        * [Functions](#functions)
-        * [Classes](#classes)
-        * [Namespaces](#namespaces)
-      * [2\. Apply](#2-apply-1)
-      * [3\. Present](#3-present-1)
-    * [7\. Functions revisited](#7-functions-revisited)
-      * [1\. Study](#1-study-2)
-        * [Input\-output contract](#input-output-contract)
-        * [Pass by value vs pass by reference](#pass-by-value-vs-pass-by-reference)
-        * [Function naming](#function-naming)
-        * [Recursive functions](#recursive-functions)
-      * [2\. Apply](#2-apply-2)
-      * [3\. Present](#3-present-2)
-    * [8\. Classes revisited](#8-classes-revisited)
-      * [1\. Study](#1-study-3)
-        * [Exceptions](#exceptions)
-      * [2\. Apply](#2-apply-3)
-      * [3\. Present](#3-present-3)
 
 
 ## Learning Progression 003: Screensavers (Part 2)
@@ -416,7 +379,7 @@ function double2(n : number) : number {
 a = double2(a)
 basic.showNumber(a)  // only now does a change, because we assigned a new value to it
 ```
-2. `[<cept>]`_Pass by reference_ means that the value of the argument is actually the `[<cept>]`_memory address_ of the data structure or object that is being passed. In this case, the function modifies the original variable. This method works for all arrays and class instances.  
+2. `[<cept>]`_Pass by reference_ means that the value of the argument is actually the `[<cept>]`_memory address_ (aka `[<cept>]`_pointer_, esp. in C/C++) of the data structure or object that is being passed. In this case, the function modifies the original variable. This method works for all arrays and class instances.  
 ```javascript
 // Example 7.1.2
 
@@ -509,6 +472,17 @@ In the [Lab Notebook](README.md):
 #### 1. Study
 [[toc](#table-of-contents)]
 
+##### Classes are type definitions
+
+   - defining a type:
+     - data  
+     - methods  
+     - exceptions  
+
+##### Exceptions
+
+##### Objects are dictionaries
+
    - object properties  
    - object literals: objects as dictionaries  
    - in JS, [classes are functions under the hood](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Classes)  
@@ -516,13 +490,10 @@ In the [Lab Notebook](README.md):
      - [Static TS](https://www.microsoft.com/en-us/research/publication/static-typescript/) implementation  
      - prototypes (too much)  
      - JS vs TS  
-   - [Getters and setters](https://developer.mozilla.org/en-US/docs/Learn/JavaScript/Objects/Inheritance#Getters_and_Setters)  
-   - defining a type:
-     - data  
-     - methods  
-     - exceptions  
 
-##### Exceptions
+##### Getters and setters 
+   - [Getters and setters](https://developer.mozilla.org/en-US/docs/Learn/JavaScript/Objects/Inheritance#Getters_and_Setters)  
+
 
 #### 2. Apply
 [[toc](#table-of-contents)]

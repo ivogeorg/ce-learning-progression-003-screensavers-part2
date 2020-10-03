@@ -439,7 +439,7 @@ arr.forEach(function (value: number, index: number) {
    
 ##### Function naming
 
-`[<lernact-rd>]`The discourse about naming functions has the intensity of religious fervor, so we are only going to mention two very popular styles that we have already used:
+`[<lernact-rd>]`The debate about over functions has reached the intensity of religious fervor, so we are only going to mention two very popular styles that we have already used:
 1. `[<cept>]`_Camel case_ capitalizes every word in the function name except the first one (e.g. `frequencyBars` and `freqBars`).  
 2. `[<cept>]`_Snake case_ is all lower-case and divides the words in the function name with underscores (e.g. `bouncing_marbles`).  
 
@@ -514,17 +514,78 @@ In the [Lab Notebook](README.md):
 
 ##### Classes are type definitions
 
-`[<lernact-rd>]`
-   - defining a type:
-     - data  
-     - methods  
-     - exceptions  
+`[<lernact-rd>]`So, what are classes after all? We mentioned that they are `[<cept>]`_templates_ for `[<cept>]`_objects_, but that is too abstract and not well grounded. Most importantly, classes are `[<cept>]`_data type definitions_. A class defines a data type by defining the its relationships with the rest of the data types in the computing environment (e.g. the `BrightPoint` class is essentially an array of three integers, `x`, `y`, and `b`) and constrains the operations that can be performed on objects of this type. Specifically, a class does that in the following ways:
+1. Defines the **data** that an object of this type contains.  
+2. Defines the **methods** that can be applied (that is, called on) objects of this type.   
+3. If necessary, rejects **anomalous usage** (e.g. division by zero) with the help of an important language feature called `[<cept>]`[_exception handling_](https://basarat.gitbook.io/typescript/type-system/exceptions). 
 
 ##### Exceptions
 
-`[<lernact-rd>]`
+`[<lernact-rd>]``[<cept>]`_Exceptions_ are a mechanism for preventing disallowed usage of a data type and/or program because if such usage were to be allowed, the program state would become irrecoverably `[<cept>]`_inconsistent_. For example, knowing that division by zero is not mathematically defined, how can we rely on a program that has tried to divide by zero? Exceptions prevent this and similar anomalous behavior from ever happening and provide a recovery mechanism. Here is a canonical example **(note: does not work in makecode)**:
+```javascript
+// Example 8.1.1
 
-`throw`
+class Fraction {
+    num : number
+    denom : number
+
+    constructor(num : number, denom : number) {
+        if (denom == 0) throw new Error("Denominator cannot be zero!")
+
+        this.num = num
+        this.denom = denom
+    }
+
+    show() {
+        basic.showString(this.num.toString() + '/'+this.denom.toString())
+    }
+}
+
+let f : Fraction = new Fraction(1, 2)
+f.show()                                    // <-- this shows fine
+
+
+try {
+    let g : Fraction = new Fraction(5, 0)   // <-- this will "throw" the ValueError exception
+    g.show()
+} catch (e) {                               // <-- this is the exception handling machanism which can prevent the program being terminated
+    basic.showString("Error: " + e.toString())
+}
+```
+Notice the different parts:
+1. The `throw` keyword is used to generate an exception, which is essentially a new `Error` object.  
+2. The `try...catch` statement is used to enclose code that might thrown an exception, as the line trying to declare a `Fraction` object with a zero denominator.  
+3. If the enclosed code does not throw an exception, the `g.show()` executes and the program continues after the `catch` block.  
+4. If the enclosed code does throw an exception, it is "caught", processed (here, just printing its message), and then the program continues after the `catch` block.  
+
+Unfortunately, the writers of MakeCode, though they [support exceptions](https://makecode.com/language), they have not exposed the `Error` class. And, despite the `try...catch` clause being accepted syntactically by the editor, it does not work as expected. However, the following code **does** work:
+```javascript
+// Example 8.1.2
+
+class Fraction {
+    num : number
+    denom : number
+
+    constructor(num : number, denom : number) {
+        if (denom == 0) throw _py.VALUE_ERROR
+
+        this.num = num
+        this.denom = denom
+    }
+
+    show() {
+        basic.showString(this.num.toString() + '/'+this.denom.toString())
+    }
+}
+
+let f : Fraction = new Fraction(1, 2)
+f.show()                                 // <-- this scrolls fine
+
+let g : Fraction = new Fraction(5, 0)    // <-- the thrown exception terminates the program with a sad face 
+g.show()                                 // <-- never reached
+```
+So, `throw` works to give you minimal functionality to reject unsupported input in the constructor. _(Incidentally, the debate over whether a constructor should throw exceptions is also a very heated one!)_
+
 
 ##### Objects are dictionaries
 

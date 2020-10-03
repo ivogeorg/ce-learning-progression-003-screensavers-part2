@@ -492,7 +492,7 @@ We need to note that recursive functions, while they look very elegant, are very
 In the [programs](programs) directory:
 1. Add your program from 7.2.1 with filename `microbit-program-7-2-1.js`.  
 2. Add your program from 7.2.2 with filename `microbit-program-7-2-2.js`.  
-2. Add your program from 7.2.3 with filename `microbit-program-7-2-3.js`.  
+3. Add your program from 7.2.3 with filename `microbit-program-7-2-3.js`.  
 
 In the [Lab Notebook](README.md):
 1. Link to the program from 7.2.1.  
@@ -547,3 +547,13 @@ In the [Lab Notebook](README.md):
 #### 3. Present
 [[toc](#table-of-contents)]
    
+In the [programs](programs) directory:
+1. Add your program from 8.2.2 with filename `microbit-program-8-2-2.js`.  
+2. Add your program from 8.2.3 with filename `microbit-program-8-2-3.js`.  
+
+In the [Lab Notebook](README.md):
+1. Link to the program from 8.2.2.  
+2. Link to a demo video showing the execution of the program from 8.2.2.  
+3. Link to the program from 8.2.3.  
+4. Link to a demo video showing the execution of the program from 8.2.3.  
+

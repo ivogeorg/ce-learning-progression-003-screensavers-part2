@@ -514,6 +514,7 @@ In the [Lab Notebook](README.md):
 
 ##### Classes are type definitions
 
+`[<lernact-rd>]`
    - defining a type:
      - data  
      - methods  
@@ -521,17 +522,21 @@ In the [Lab Notebook](README.md):
 
 ##### Exceptions
 
+`[<lernact-rd>]`
+
+`throw`
+
 ##### Objects are dictionaries
 
-   - object properties  
-   - object literals: objects as dictionaries  
+`[<lernact-rd>]`
+   - an anstract view of class fields and object properties  
+   - objects as dictionaries: object literal example
    - in JS, [classes are functions under the hood](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Classes)  
-   - TODO  
-     - [Static TS](https://www.microsoft.com/en-us/research/publication/static-typescript/) implementation  
-     - prototypes (too much)  
-     - JS vs TS  
+   - the implementation details of [Static TypeScript (STS)](https://www.microsoft.com/en-us/research/publication/static-typescript/)  
 
-##### Getters and setters 
+##### Getters and setters
+
+`[<lernact-rd>]`
    - [Getters and setters](https://developer.mozilla.org/en-US/docs/Learn/JavaScript/Objects/Inheritance#Getters_and_Setters)  
 
 

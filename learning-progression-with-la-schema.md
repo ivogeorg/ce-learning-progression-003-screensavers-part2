@@ -278,7 +278,7 @@ The "packages" of functions in the MakeCode environment (e.g. `basic`, `input`, 
 3. `.h` stands for header file (in C and C++).  
 4. `.json` stands for JSON, a simple data format.  
 5. `.jres` stands for a JSON file where project resources are stored.  
-6. `.s` stands for assembly.  
+6. `.s` stands for `[<cept>]`_assembler_ (aka `[<cept>]`_assembly language_). This is the form of directly-executable code your programs are translated (the actual term is `[<cept>]`_compiled_) into. Both terms only make sense in their original historical setting, but have remained in usage ever since.    
 
 Here is part of the `basic` namespace, contained in the [basic.ts](https://github.com/microsoft/pxt-microbit/blob/master/libs/core/basic.ts) file in the MakeCode codebase. The rest is in [basic.cpp](https://github.com/microsoft/pxt-microbit/blob/master/libs/core/basic.cpp), which is written in C++ and you don't have to read it.
 ```javascript

@@ -2,6 +2,46 @@
 
 This is learning progression 003 for the Fall 2020 installment of the course CPE 1040: Introduction to Computer Engineering at MSU Denver.
 
+Table of Contents
+=================
+
+* [CPE 1040 \- Fall 2020](#cpe-1040---fall-2020)
+  * [Learning Progression 003: Screensavers (Part 2)](#learning-progression-003-screensavers-part-2)
+    * [5\. Randomized behavior](#5-randomized-behavior)
+      * [1\. Study](#1-study)
+        * [Importance of randomization](#importance-of-randomization)
+        * [Pseudorandom numbers](#pseudorandom-numbers)
+        * [Random functions](#random-functions)
+        * [Randomization in the target program](#randomization-in-the-target-program)
+        * [Bouncing marbles](#bouncing-marbles)
+        * [Simulator infidelity](#simulator-infidelity)
+        * [Thread unsafety](#thread-unsafety)
+      * [2\. Apply](#2-apply)
+      * [3\. Present](#3-present)
+    * [6\. Encapsulation](#6-encapsulation)
+      * [1\. Study](#1-study-1)
+        * [Benefits of encapsulation](#benefits-of-encapsulation)
+        * [Functions](#functions)
+        * [Classes](#classes)
+        * [Namespaces](#namespaces)
+      * [2\. Apply](#2-apply-1)
+      * [3\. Present](#3-present-1)
+    * [7\. Functions revisited](#7-functions-revisited)
+      * [1\. Study](#1-study-2)
+        * [Input\-output contract](#input-output-contract)
+        * [Pass by value vs pass by reference](#pass-by-value-vs-pass-by-reference)
+        * [Function naming](#function-naming)
+        * [Recursive functions](#recursive-functions)
+      * [2\. Apply](#2-apply-2)
+      * [3\. Present](#3-present-2)
+    * [8\. Classes revisited](#8-classes-revisited)
+      * [1\. Study](#1-study-3)
+        * [Classes are type definitions](#classes-are-type-definitions)
+        * [Exceptions](#exceptions)
+        * [Objects are dictionaries](#objects-are-dictionaries)
+        * [Getters and setters](#getters-and-setters)
+      * [2\. Apply](#2-apply-3)
+      * [3\. Present](#3-present-3)
 
 
 ## Learning Progression 003: Screensavers (Part 2)
@@ -238,7 +278,7 @@ The "packages" of functions in the MakeCode environment (e.g. `basic`, `input`, 
 3. `.h` stands for header file (in C and C++).  
 4. `.json` stands for JSON, a simple data format.  
 5. `.jres` stands for a JSON file where project resources are stored.  
-6. `.s` stands for assembly.  
+6. `.s` stands for `[<cept>]`_assembler_ (aka `[<cept>]`_assembly language_). This is the form of directly-executable code your programs are translated (the actual term is `[<cept>]`_compiled_) into. Both terms only make sense in their original historical setting, but have remained in usage ever since.    
 
 Here is part of the `basic` namespace, contained in the [basic.ts](https://github.com/microsoft/pxt-microbit/blob/master/libs/core/basic.ts) file in the MakeCode codebase. The rest is in [basic.cpp](https://github.com/microsoft/pxt-microbit/blob/master/libs/core/basic.cpp), which is written in C++ and you don't have to read it.
 ```javascript
@@ -399,9 +439,9 @@ arr.forEach(function (value: number, index: number) {
    
 ##### Function naming
 
-`[<lernact-rd>]`The discourse about naming functions has the intensity of religious fervor, so we are only going to mention two very popular styles that we have already used:
+`[<lernact-rd>]`The argument over function naming has been long and intense, so we are only going to mention two very popular styles that we have already used:
 1. `[<cept>]`_Camel case_ capitalizes every word in the function name except the first one (e.g. `frequencyBars` and `freqBars`).  
-2. `[<cept>]`_Snake case_ is all lower-case and divides the words in the function name with underscores (e.g. `bouncing_marbles`).  
+2. `[<cept>]`_Snake case_ is all lower-case and divides the words in the function name with underscores (e.g. `bouncing_marbles`).   
 
 It doesn't matter that much which one you use, as long as you are consistent. This said, we have been inconsistent in naming our screensavers, but only so that we can explicitly talk about these two function naming conventions.  
 
@@ -474,25 +514,131 @@ In the [Lab Notebook](README.md):
 
 ##### Classes are type definitions
 
-   - defining a type:
-     - data  
-     - methods  
-     - exceptions  
+`[<lernact-rd>]`So, what are classes after all? We mentioned that they are `[<cept>]`_templates_ for `[<cept>]`_objects_, but that is too abstract and not well grounded. Most importantly, classes are `[<cept>]`_data type definitions_. A class defines a data type by defining the its relationships with the rest of the data types in the computing environment (e.g. the `BrightPoint` class is essentially an array of three integers, `x`, `y`, and `b`) and constrains the operations that can be performed on objects of this type. Specifically, a class does that in the following ways:
+1. Defines the **data** that an object of this type contains.  
+2. Defines the **methods** that can be applied (that is, called on) objects of this type.   
+3. If necessary, rejects **anomalous usage** (e.g. division by zero) with the help of an important language feature called `[<cept>]`[_exception handling_](https://basarat.gitbook.io/typescript/type-system/exceptions). 
 
 ##### Exceptions
 
+`[<lernact-rd>]``[<cept>]`_Exceptions_ are a mechanism for preventing disallowed usage of a data type and/or program because if such usage were to be allowed, the program state would become irrecoverably `[<cept>]`_inconsistent_. For example, knowing that division by zero is not mathematically defined, how can we rely on a program that has tried to divide by zero? Exceptions prevent this and similar anomalous behavior from ever happening and provide a recovery mechanism. Here is a canonical example **(note: does not work in makecode)**:
+```javascript
+// Example 8.1.1
+
+class Fraction {
+    num : number
+    denom : number
+
+    constructor(num : number, denom : number) {
+        if (denom == 0) throw new Error("Denominator cannot be zero!")
+
+        this.num = num
+        this.denom = denom
+    }
+
+    show() {
+        basic.showString(this.num.toString() + '/'+this.denom.toString())
+    }
+}
+
+let f : Fraction = new Fraction(1, 2)
+f.show()                                    // <-- this shows fine
+
+
+try {
+    let g : Fraction = new Fraction(5, 0)   // <-- this will "throw" the ValueError exception
+    g.show()
+} catch (e) {                               // <-- this is the exception handling machanism which can prevent the program being terminated
+    basic.showString("Error: " + e.toString())
+}
+```
+Notice the different parts:
+1. The `throw` keyword is used to generate an exception, which is essentially a new `Error` object.  
+2. The `try...catch` statement is used to enclose code that might thrown an exception, as the line trying to declare a `Fraction` object with a zero denominator.  
+3. If the enclosed code does not throw an exception, the `g.show()` executes and the program continues after the `catch` block.  
+4. If the enclosed code does throw an exception, it is "caught", processed (here, just printing its message), and then the program continues after the `catch` block.  
+
+Unfortunately, the writers of MakeCode, though they [support exceptions](https://makecode.com/language), they have not exposed the `Error` class. And, despite the `try...catch` clause being accepted syntactically by the editor, it does not work as expected. However, the following code **does** work:
+```javascript
+// Example 8.1.2
+
+class Fraction {
+    num : number
+    denom : number
+
+    constructor(num : number, denom : number) {
+        if (denom == 0) throw _py.VALUE_ERROR
+
+        this.num = num
+        this.denom = denom
+    }
+
+    show() {
+        basic.showString(this.num.toString() + '/'+this.denom.toString())
+    }
+}
+
+let f : Fraction = new Fraction(1, 2)
+f.show()                                 // <-- this scrolls fine
+
+let g : Fraction = new Fraction(5, 0)    // <-- the thrown exception terminates the program with a sad face 
+g.show()                                 // <-- never reached
+```
+So, `throw` works to give you minimal functionality to reject unsupported input in the constructor. _(Incidentally, the debate over whether a constructor should throw exceptions is also a very heated one!)_
+
+
 ##### Objects are dictionaries
 
-   - object properties  
-   - object literals: objects as dictionaries  
-   - in JS, [classes are functions under the hood](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Classes)  
-   - TODO  
-     - [Static TS](https://www.microsoft.com/en-us/research/publication/static-typescript/) implementation  
-     - prototypes (too much)  
-     - JS vs TS  
+`[<lernact-rd>]`Another way to look at classes is to focus on the objects themselves and realize that they are `[<cept>]`_dictionaries_. Dictionaries in computing are data structures which match `[<cept>]`_keys_ with `[<cept>]`_values_. They are also called `[<cept>]`_maps_ or `[<cept>]`_hash tables_, but they are just collections of data pairs. The value can be anything, literally anything, including the same value throughout the dictionary. However, the keys have to be `[<cept>]`_unique_. There cannot be two different key-value pairs with the same key.
 
-##### Getters and setters 
-   - [Getters and setters](https://developer.mozilla.org/en-US/docs/Learn/JavaScript/Objects/Inheritance#Getters_and_Setters)  
+The keys of the objects are their field names (e.g. the `x`, `y`, and `b` of `BrightPoint` objects) and the values are their specific values, different for every object. This is the essence of objects - their independend `[<cept>]`_lifecycle_ - and correspondingly a very valid perspective on what classes are, as object templates. In fact, in JavaScript, this is the dominating perspective!
+
+If you want to read the implementation details of the JavaScript-like language that we use in MakeCode, called Static TypeScript (STS), read their [paper](https://www.microsoft.com/en-us/research/publication/static-typescript/). It's a fascinating read, once you get used to the terminology, and provides an enticing peek into the software stack of the micro:bit.  
+
+
+##### Getters and setters
+
+`[<lernact-rd>]`In the line of the objects-as-dictionaries perspective on classes that we just discussed, we should mention a very common pattern for class methods, namely the so called `[<cept>]`[_getters and setters_](https://developer.mozilla.org/en-US/docs/Learn/JavaScript/Objects/Inheritance#Getters_and_Setters), (aka `get` and `set` accessors). These are methods with specific syntax that are just there to allow us to get and set the values in the "object dictionary". Here's an example:
+```javascript
+// Example 8.1.3
+
+class Point {
+    private _x : number
+    private _y : number
+
+    constructor(x : number, y : number) {
+        this._x = x
+        this._y = y
+    }
+
+    get x() {
+        return this._x
+    }
+
+    set x(new_x : number) {
+        this._x = new_x
+    }
+
+    get y() {
+        return this._y
+    }
+
+    set y(new_y : number) {
+        this._y = new_y
+    }
+}
+
+let p0 : Point = new Point(1, 2)
+
+basic.showNumber(p0.x)            // <-- call the getter of `_x`
+basic.pause(100)
+p0.x = 5                          // <-- call the setter of `_x`
+basic.showNumber(p0.x)
+```
+Notice the following:
+1. The `get` and `set` keywords.  
+2. The underscore in `_x` and `_y` to avoid duplicate names with the getters and setters of `x` and `y`.
+3. The `private` keyword in front of `_x` and `_y`, which disallows calls like `p0._x` (that is, direct access to the object fields). `[<cept>]`_Hiding_ the implementation of the functionality encapsulated in a class is the reason for the popularity of getters and setters in the first place. _The detailed considerations belong to the theory and history of object-oriented programming._      
 
 
 #### 2. Apply

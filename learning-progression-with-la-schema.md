@@ -47,7 +47,7 @@ Table of Contents
 ## Learning Progression 003: Screensavers (Part 2)
 [[toc](#table-of-contents)]
 
-This progression is the culmination of the first part of the course, in which we program the bear-bones micro:bit without any extenral circuitry attached and without communication features. We pull together all the programming language features and best practices that we introduced in the previous two learning progressions, to write a significantly larger target program over 12 steps. This will present the opportunity to learn about some of the design considerations a programmer makes when approaching a larger project. The progression is also going to dig a bit deeper into the _softare stack_ of the micro:bit, and uncover the ways it affects these considerations.
+This progression is the culmination of the first part of the course, in which we program the bear-bones micro:bit without any external circuitry attached and without communication features. We pull together all the programming language features and best practices that we introduced in the previous two learning progressions, to write a significantly larger target program over 12 steps. This will present the opportunity to learn about some of the design considerations a programmer makes when approaching a larger project. The progression is also going to dig a bit deeper into the _softare stack_ of the micro:bit, and uncover the ways it affects these considerations.
 
    
 ### 5. Randomized behavior  
@@ -171,11 +171,15 @@ While we will cover `[<cept>]`_threads_ (that is, _execution threads_), `[<cept>
 #### 2. Apply
 [[toc](#table-of-contents)]
 
-1. `[<lernact-prac>]`Write a function `randomPrime` that generates random primes in the range [1, 1000]. _How many primes are there in this range?_ Write a small program to demonstrate the operation.    
+1. `[<lernact-prac>]`Write a function `randomPrime` that generates random primes in the range [1, 1000]. _How many primes are there in this range?_ Write a small program to demonstrate the operation. 
+
+   _So, a program that generates random numbers, and then determines whether or not they are prime? The algorithm that came to my mind generates a random number, then looks for any factors in a for loop, and uses recursion to call the function again if it finds a non-prime factor. Is that the kind of thing you intended?_ 
 
 2. `[<lernact-prac>]`Add depth (aka distance) to your rain simulation, with more distant raindrops appearing dimmer and moving more slowly.  
 
 3. `[<lernact-prac>]`Implement the `bouncing_marbles()` screensaver function and add it to your screensavers program matched to the `Shake` gesture. Requirements:
+
+   _It looks like you meant to add more here._
 
 4. `[<lernact-prac>]`**[Optional challenge, max 3 extra step points]** Modify your `rain()` function to show the raindrops falling at 45° to the right.  
 
@@ -214,7 +218,7 @@ In the [Lab Notebook](README.md):
 
 `[<lernact-rd>]``[<cept>]`_Encapsulation_, in computer programming, is the enclosing of computational artifacts (data and code) into _named_ containers (here meaning distinct program regions) for the purpose of avoiding code duplication, program structuring and organization, and abstraction and simplification of the top-level program loop. Encapsulation is a widely used engineering principle, allowing practitioners to implement and users to utilize technology without knowing all the details. It is the greatest way to decrease the `[<cept>]`_cognitive load_ of both engineering work and technology usage.
 
-The main encapsulation features of computer programming languages, and also available in the single-file MakeCode programming environment for the micro:bit, are `[<cept>]`_functions_, `[<cept>]`_classes_, and `[<cept>]`_namespaces_. Other environments allow for multi-file programs, thus making files part of the encapsulation and abstraction hierarchy of functions, classes, and namespaces. Other languages additionally organizing programs into `[<cept>]`_modules_, `[<cept>]`_packages_, and other top-level structural elements.
+The main encapsulation features of computer programming languages, and also available in the single-file MakeCode programming environment for the micro:bit, are `[<cept>]`_functions_, `[<cept>]`_classes_, and `[<cept>]`_namespaces_. Other environments allow for multi-file programs, thus making files part of the encapsulation and abstraction hierarchy of functions, classes, and namespaces. Other languages additionally organize programs into `[<cept>]`_modules_, `[<cept>]`_packages_, and other top-level structural elements.
 
 ##### Functions
 
@@ -322,6 +326,9 @@ Notice the `export` keyword in front of the `showNumber`. This is what allows co
 [[toc](#table-of-contents)]
 
 1. `[<lernact-prac>]`Encasulate your screensaver code in a namespace `screensaver` so that the only code that is outside is the main program loop, which calls functions exported by the namespace. In particular:
+
+   _So, if I understand correctly, we can only use one file, so copy all of the subsequent functions and classes into this namespace. Then, call the functions from outside of the namespace?_
+   
    1. The function `coding()` should be exported.  
    2. The function `rain()` should be exported.  
    3. The function `freqBars()` should be exported.  
@@ -389,16 +396,16 @@ In the [Lab Notebook](README.md):
 ##### Input-output contract  
 `[<lernact-rd>]`The input-output contract of a function consists of the particular transformation of the input data (that is, the arguments) into the output data (that is, the return value). Even functions which do not return anything have an input-output contract, as they may be modifying internal data structures (e.g. class methods). Functions which do not take any arguments are often called `[<cept>]`_routines_.
 
-Formally, the input-output contract refers includes the number and types of function parameters as well as the type of the return value, if any. The shortest expression of the input-output contract is the function _signature_.
+Formally, the input-output contract includes the number and types of function parameters as well as the type of the return value, if any. The shortest expression of the input-output contract is the function _signature_.
 
 The input-output contract of a function is an _invariant_, meaning that it is strictly fixed, and _does not change_ even when the specific implementation of the function changes. A function is thus an _encapsulation of an input-output contract_.
 
-Functions can also perform operations that are not strictly part of the input-output contract and are not otherwise explicitly stated. Such operations are therefore called `[<cept>]`_side effects_. Side effects relate to a very important feature of functional input-output contracts, namely that the latter guarantee that the program state is `[<cept>]`_consistent_ before and after the execution of a function (though it may briefly become inconsistent in the middle of its execution); side effects are potential holes in the input-output contract, and may introduce suble inconsistencies that are hard to trace and fix.  
+Functions can also perform operations that are not strictly part of the input-output contract and are not otherwise explicitly stated. Such operations are therefore called `[<cept>]`_side effects_. Side effects relate to a very important feature of functional input-output contracts, namely that the latter guarantee that the program state is `[<cept>]`_consistent_ before and after the execution of a function (though it may briefly become inconsistent in the middle of its execution); side effects are potential holes in the input-output contract, and may introduce subtle inconsistencies that are hard to trace and fix.  
 
 ##### Pass by value vs pass by reference  
 
 `[<lernact-rd>]`An important aspect of functions is how the arguments are passed to the function through the function call. There are two ways:
-1. `[<cept>]`_Pass by value_ means that the value of the argument is a copy of the original variable (unless it is a _literal_ in which case it is not a copy of anything, for exmple the number `3`). In this case, the function can use the value but cannot modify the original variable. This method works for all `[<cept>]`_primitive_ data types.  
+1. `[<cept>]`_Pass by value_ means that the value of the argument is a copy of the original variable (unless it is a _literal_ in which case it is not a copy of anything, for example the number `3`). In this case, the function can use the value but cannot modify the original variable. This method works for all `[<cept>]`_primitive_ data types.  
 ```javascript
 // Example 7.1.1
 
@@ -418,9 +425,7 @@ function double2(n : number) : number {
 
 a = double2(a)
 basic.showNumber(a)  // only now does a change, because we assigned a new value to it
-```  
-<img src="images/pass-by-value.png" alt="Pass by value" width="800" />  
-
+```
 2. `[<cept>]`_Pass by reference_ means that the value of the argument is actually the `[<cept>]`_memory address_ (aka `[<cept>]`_pointer_, esp. in C/C++) of the data structure or object that is being passed. In this case, the function modifies the original variable. This method works for all arrays and class instances.  
 ```javascript
 // Example 7.1.2
@@ -438,7 +443,6 @@ arr.forEach(function (value: number, index: number) {
     basic.showNumber(value)                              // the elements of the array are now doubled!
 })
    ```  
-<img src="images/pass-by-reference.png" alt="Pass by reference" width="800" />  
    
 ##### Function naming
 
@@ -517,7 +521,7 @@ In the [Lab Notebook](README.md):
 
 ##### Classes are type definitions
 
-`[<lernact-rd>]`So, what are classes after all? We mentioned that they are `[<cept>]`_templates_ for `[<cept>]`_objects_, but that is too abstract and not well grounded. Most importantly, classes are `[<cept>]`_data type definitions_. A class defines a data type by defining the its relationships with the rest of the data types in the computing environment (e.g. the `BrightPoint` class is essentially an array of three integers, `x`, `y`, and `b`) and constrains the operations that can be performed on objects of this type. Specifically, a class does that in the following ways:
+`[<lernact-rd>]`So, what are classes after all? We mentioned that they are `[<cept>]`_templates_ for `[<cept>]`_objects_, but that is too abstract and not well grounded. Most importantly, classes are `[<cept>]`_data type definitions_. A class defines a data type by defining its relationships with the rest of the data types in the computing environment (e.g. the `BrightPoint` class is essentially an array of three integers, `x`, `y`, and `b`) and constrains the operations that can be performed on objects of this type. Specifically, a class does that in the following ways:
 1. Defines the **data** that an object of this type contains.  
 2. Defines the **methods** that can be applied (that is, called on) objects of this type.   
 3. If necessary, rejects **anomalous usage** (e.g. division by zero) with the help of an important language feature called `[<cept>]`[_exception handling_](https://basarat.gitbook.io/typescript/type-system/exceptions). 
@@ -594,7 +598,7 @@ So, `throw` works to give you minimal functionality to reject unsupported input 
 
 `[<lernact-rd>]`Another way to look at classes is to focus on the objects themselves and realize that they are `[<cept>]`_dictionaries_. Dictionaries in computing are data structures which match `[<cept>]`_keys_ with `[<cept>]`_values_. They are also called `[<cept>]`_maps_ or `[<cept>]`_hash tables_, but they are just collections of data pairs. The value can be anything, literally anything, including the same value throughout the dictionary. However, the keys have to be `[<cept>]`_unique_. There cannot be two different key-value pairs with the same key.
 
-The keys of the objects are their field names (e.g. the `x`, `y`, and `b` of `BrightPoint` objects) and the values are their specific values, different for every object. This is the essence of objects - their independend `[<cept>]`_lifecycle_ - and correspondingly a very valid perspective on what classes are, as object templates. In fact, in JavaScript, this is the dominating perspective!
+The keys of the objects are their field names (e.g. the `x`, `y`, and `b` of `BrightPoint` objects) and the values are their specific values, which are different for every object. This is the essence of objects - their independent `[<cept>]`_lifecycle_ - and correspondingly a very valid perspective on what classes are, as object templates. In fact, in JavaScript, this is the dominating perspective!
 
 If you want to read the implementation details of the JavaScript-like language that we use in MakeCode, called Static TypeScript (STS), read their [paper](https://www.microsoft.com/en-us/research/publication/static-typescript/). It's a fascinating read, once you get used to the terminology, and provides an enticing peek into the software stack of the micro:bit.  
 
@@ -655,14 +659,17 @@ Notice the following:
    5. Implement the function `Complex.showComplex(c : ComplexNumber) : void` to scroll a complex number as a string (e.g. `"-14-i31"`, `i`, `-i6`, `4+i7`, etc.).  
 2. `[<lernact-prac>]`Using the `ComplexNumber` and the `Complex` methods, define the numbers `6+i7` and `-8-i5`, and:
    1. Add them. The program should scroll the first number, then show `+` for 500 ms, then scroll the second number, then show `=` for 500 ms, and finally scroll the result. _Note that you cannot use `scrollString` for the plus. You will have to define your own icon `Plus`._  
+   
+   _I don't understand this note. Do you mean that they can't use `showString`? If so, I don't understand why not, `+` is in ascii and can therefore be shown like any other character. If this is supposed to be a custom icon, I think more clarity on that will be necessary._
+   
    2. Find their conjugates. For each number, the program should scroll the number, then show `C` for 500 ms, and finally scroll the result. _See the previous note._   
-   3. Multiply them. The program should scroll the first number, then show a custon icon `Mult` (a X centered at (2, 2) and spanning the 3x3 square with origin at (1, 1)) for 500 ms, then scroll the second number, then show `=` for 500 ms, and finally scroll the result.  
+   3. Multiply them. The program should scroll the first number, then show a custom icon `Mult` (a X centered at (2, 2) and spanning the 3x3 square with origin at (1, 1)) for 500 ms, then scroll the second number, then show `=` for 500 ms, and finally scroll the result.  
 3. `[<lernact-prac>]`**[Optional challenge, max 10 extra step points]** In the namespace `Complex`:
    1. Write a class to represent `[<cept>]`_fractions_, called `Fraction`. Fractions should show in their `[<cept>]`_reduced form_. If a `Fraction` object is defined in `[<cept>]`_irreduced form_, it should be reduced internally in the constructor. 
    2. Implement the function `Complex.showFraction(f : ComplexNumber) : void` to scroll a reduced fraction as a string (e.g. `"15/16"`, `7`, `13/14`, `9/5`, etc.).  
    3. Modify your `ComplexNumber` class to work with fractions instead of `[<cept>]`[_continuous real and imaginary coefficients_](https://proofwiki.org/wiki/Real_and_Imaginary_Part_Projections_are_Continuous). If the `[<cept>]`_real_ or `[<cept>]`_imaginary_ part of the a complex is an irreducible fraction, show the number with fractional (not continous real) `[<cept>]`_coefficients_.  
    4. Modify your `showComplex` function to show complex numbers with integers or fractional coefficients (e.g. `12/13+i4/7`, `-14-i31`, `9/5-i7`, etc.).  
-   5. Divide `6+i7` by `-8-i5`. The program should scroll the first number, then show a custon icon `Div` (a / centered at (2, 2) and spanning the 3x3 square with origin at (1, 1)) for 500 ms, then scroll the second number, then show `=` for 500 ms, and finally scroll the result. _Note the result has to be in the canonical form A + iB, where A and B are either integers or fractions._    
+   5. Divide `6+i7` by `-8-i5`. The program should scroll the first number, then show a custom icon `Div` (a / centered at (2, 2) and spanning the 3x3 square with origin at (1, 1)) for 500 ms, then scroll the second number, then show `=` for 500 ms, and finally scroll the result. _Note the result has to be in the canonical form A + iB, where A and B are either integers or fractions._    
 
 #### 3. Present
 [[toc](#table-of-contents)]

@@ -419,7 +419,7 @@ function double2(n : number) : number {
 a = double2(a)
 basic.showNumber(a)  // only now does a change, because we assigned a new value to it
 ```  
-<img src="images/pass-by-value.png" alt="Pass by value" width="600" />  
+<img src="images/pass-by-value.png" alt="Pass by value" width="800" />  
 
 2. `[<cept>]`_Pass by reference_ means that the value of the argument is actually the `[<cept>]`_memory address_ (aka `[<cept>]`_pointer_, esp. in C/C++) of the data structure or object that is being passed. In this case, the function modifies the original variable. This method works for all arrays and class instances.  
 ```javascript
@@ -438,7 +438,7 @@ arr.forEach(function (value: number, index: number) {
     basic.showNumber(value)                              // the elements of the array are now doubled!
 })
    ```  
-<img src="images/pass-by-reference.png" alt="Pass by reference" width="600" />  
+<img src="images/pass-by-reference.png" alt="Pass by reference" width="800" />  
    
 ##### Function naming
 

@@ -439,9 +439,9 @@ arr.forEach(function (value: number, index: number) {
    
 ##### Function naming
 
-`[<lernact-rd>]`The debate about over functions has reached the intensity of religious fervor, so we are only going to mention two very popular styles that we have already used:
+`[<lernact-rd>]`The argument over function naming has been long and intense, so we are only going to mention two very popular styles that we have already used:
 1. `[<cept>]`_Camel case_ capitalizes every word in the function name except the first one (e.g. `frequencyBars` and `freqBars`).  
-2. `[<cept>]`_Snake case_ is all lower-case and divides the words in the function name with underscores (e.g. `bouncing_marbles`).  
+2. `[<cept>]`_Snake case_ is all lower-case and divides the words in the function name with underscores (e.g. `bouncing_marbles`).   
 
 It doesn't matter that much which one you use, as long as you are consistent. This said, we have been inconsistent in naming our screensavers, but only so that we can explicitly talk about these two function naming conventions.  
 

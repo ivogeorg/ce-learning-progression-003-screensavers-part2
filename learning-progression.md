@@ -58,18 +58,18 @@ This progression is the culmination of the first part of the course, in which we
 
 ##### Importance of randomization
 
-`[<lernact-rd>]`We have used `[<cept>]`_randomization_ in fairly inconsequential ways so far, mostly to have somewhat unpredictable behavior of the output on the micro:bit 5 x 5 matrix. However, randomization is extremely important in science and engineering. Among other things, it allows generating important variation in test and diagnostics programs, achieving nearly-even coverage in probability distribution sampling, and good spreading in hash table storage. The full significance of randomization is well beyond the scope of this course.
+We have used _randomization_ in fairly inconsequential ways so far, mostly to have somewhat unpredictable behavior of the output on the micro:bit 5 x 5 matrix. However, randomization is extremely important in science and engineering. Among other things, it allows generating important variation in test and diagnostics programs, achieving nearly-even coverage in probability distribution sampling, and good spreading in hash table storage. The full significance of randomization is well beyond the scope of this course.
 
 ##### Pseudorandom numbers
 
-The numbers that the `random` functions return are actually `[<cept>]`[_pseudorandom_](https://en.wikipedia.org/wiki/Pseudorandom_number_generator), which means that an algorithm generates them in an extremely long evenly spread-out sequence. The number of elements in the whole sequence is so large, that in any specific location along it, there appears to be no relationship between nearby elements. Truly random functions are usually only achieved based on [random physical phenomena](https://www.random.org/randomness/).
+The numbers that the `random` functions return are actually [_pseudorandom_](https://en.wikipedia.org/wiki/Pseudorandom_number_generator), which means that an algorithm generates them in an extremely long evenly spread-out sequence. The number of elements in the whole sequence is so large, that in any specific location along it, there appears to be no relationship between nearby elements. Truly random functions are usually only achieved based on [random physical phenomena](https://www.random.org/randomness/).
 
 ##### Random functions
 
 In MakeCode, we have access to three randomization functions:
-1. `Math.random()` returns a pseudorandom floating-point (that is, a (possibly `[<cept>]`_truncated_) real number) number between 0 and 1. _Note that the value of 1 is [not included](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Math/random)._  
-2. `Math.randomBoolean()` returns `true` or `false` with the evenness of a pseudorandom generator. This is akin to a `[<cept>]`_coin toss_. Just like a coin toss, you cannot expect any kind of `[<cept>]`_alternation_ of `true` and `false`. They are evenly distributed (that is, there is an approximately even number of `true` and `false` value) only in the `[<cept>]`_limit_ of `[<cept>]`_infinite_ trials.  
-3. `randint(min, max)` is provided as a convenience function in MakeCode and is not usually part of the canonical JavaScript library. It returns `[<cept>]`_signed integers_, that is the values of the numbers it returns are whole numbers, which can be negative, positive, and/or zero. Curiously, the ordering of the arguments is not enforced. That is, `randint(0, 4)` is functionally equivalent to `randint(4, 0)`. _Note that both min and max are included in the range from which pseudorandom integers are returned._  
+1. `Math.random()` returns a pseudorandom floating-point (that is, a (possibly _truncated_) real number) number between 0 and 1. _Note that the value of 1 is [not included](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Math/random)._  
+2. `Math.randomBoolean()` returns `true` or `false` with the evenness of a pseudorandom generator. This is akin to a _coin toss_. Just like a coin toss, you cannot expect any kind of _alternation_ of `true` and `false`. They are evenly distributed (that is, there is an approximately even number of `true` and `false` value) only in the _limit_ of _infinite_ trials.  
+3. `randint(min, max)` is provided as a convenience function in MakeCode and is not usually part of the canonical JavaScript library. It returns _signed integers_, that is the values of the numbers it returns are whole numbers, which can be negative, positive, and/or zero. Curiously, the ordering of the arguments is not enforced. That is, `randint(0, 4)` is functionally equivalent to `randint(4, 0)`. _Note that both min and max are included in the range from which pseudorandom integers are returned._  
 
 Using these functions, you can write your own randomization routines, to fit your purposes.
 
@@ -100,7 +100,7 @@ Here is one more [video](https://msudenver.yuja.com/Dashboard/Permalink?authCode
 
 ##### Bouncing marbles
 
-`[<lernact-rd>]`This section introduces a new screensaver, called Bouncing Marbles. Here is a [video](https://msudenver.yuja.com/Dashboard/Permalink?authCode=879279461&b=1815473&linkType=video).
+This section introduces a new screensaver, called Bouncing Marbles. Here is a [video](https://msudenver.yuja.com/Dashboard/Permalink?authCode=879279461&b=1815473&linkType=video).
 
 This screensaver probably has the most complex randomization of all that we have seen so far. Just like `rain()`, which used a modulo mechanism to space out the calls to `fall()` for `Raindrop` objects, `bouncing_marbles` uses a modulo mechanism to (i) follow a trajectory with steps spaced at uneven intervals, and (ii) "release" a group of marbles at random intervals, so that they don't all fall together in parallel.
 
@@ -166,16 +166,16 @@ You may notice that when `while` loops instead of `basic.forever` for the main l
 
 ##### Thread unsafety
 
-While we will cover `[<cept>]`_threads_ (that is, _execution threads_), `[<cept>]`_multithreading_, and `[<cept>]`_thread safety_ in a later step, we need to mention that you may encounter the [micro:bit error code](https://makecode.microbit.org/device/error-codes) 980 (`undefined`) when all of a sudden the program tries to call the `move()` method on a `null` (that is, undefined) `Marble` object. _(Error codes are shown on the LED matrix by first showing a `IconNames.Sad` and then scrolling the error number.)_ This is most likely caused by the _"thread unsafety"_ of the micro:bit and is not your fault. In short, the micro:bit has a task scheduler which breaks up longer code blocks into smaller portions to execute, alternating among several so broken-up code sequences. The ordering is somewhat random, which may cause portions of your program to run in the wrong order, relative to the order that you designed them to run in per your program structure.
+While we will cover _threads_ (that is, _execution threads_), _multithreading_, and _thread safety_ in a later step, we need to mention that you may encounter the [micro:bit error code](https://makecode.microbit.org/device/error-codes) 980 (`undefined`) when all of a sudden the program tries to call the `move()` method on a `null` (that is, undefined) `Marble` object. _(Error codes are shown on the LED matrix by first showing a `IconNames.Sad` and then scrolling the error number.)_ This is most likely caused by the _"thread unsafety"_ of the micro:bit and is not your fault. In short, the micro:bit has a task scheduler which breaks up longer code blocks into smaller portions to execute, alternating among several so broken-up code sequences. The ordering is somewhat random, which may cause portions of your program to run in the wrong order, relative to the order that you designed them to run in per your program structure.
 
 #### 2. Apply
 [[toc](#table-of-contents)]
 
-1. `[<lernact-prac>]`Write a function `randomPrime` that generates random primes in the range [1, 1000]. _How many primes are there in this range?_ Write a small program to demonstrate the operation. _Hint: In a previous Step, you wrote a program to leave only the prime numbers in an array originally filled with the numbers [1, 100]. Extend this program to work for an array filled with the numbers [1, 1000]._    
-2. `[<lernact-prac>]`Add depth (aka distance) to your rain simulation, with more distant raindrops appearing dimmer and moving more slowly.  
-3. `[<lernact-prac>]`Implement the `bouncing_marbles()` screensaver function and add it to your screensavers program matched to the `Shake` gesture.  
-4. `[<lernact-prac>]`**[Optional challenge, max 3 extra step points]** Modify your `rain()` function to show the raindrops falling at 45° to the right.  
-5. `[<lernact-prac>]`**[Optional challenge, max 3 extra step points]** Modify your `bouncing_marbles()` to be able to show balls of different trajectories, simulating different elasticity coefficients of the marble material (think steel vs glass vs rubber resin).  
+1. Write a function `randomPrime` that generates random primes in the range [1, 1000]. _How many primes are there in this range?_ Write a small program to demonstrate the operation. _Hint: In a previous Step, you wrote a program to leave only the prime numbers in an array originally filled with the numbers [1, 100]. Extend this program to work for an array filled with the numbers [1, 1000]._    
+2. Add depth (aka distance) to your rain simulation, with more distant raindrops appearing dimmer and moving more slowly.  
+3. Implement the `bouncing_marbles()` screensaver function and add it to your screensavers program matched to the `Shake` gesture.  
+4. **[Optional challenge, max 3 extra step points]** Modify your `rain()` function to show the raindrops falling at 45° to the right.  
+5. **[Optional challenge, max 3 extra step points]** Modify your `bouncing_marbles()` to be able to show balls of different trajectories, simulating different elasticity coefficients of the marble material (think steel vs glass vs rubber resin).  
 
 #### 3. Present
 [[toc](#table-of-contents)]
@@ -208,13 +208,13 @@ In the [Lab Notebook](README.md):
 
 ##### Benefits of encapsulation  
 
-`[<lernact-rd>]``[<cept>]`_Encapsulation_, in computer programming, is the enclosing of computational artifacts (data and code) into _named_ containers (here meaning distinct program regions) for the purpose of avoiding code duplication, program structuring and organization, and abstraction and simplification of the top-level program loop. Encapsulation is a widely used engineering principle, allowing practitioners to implement and users to utilize technology without knowing all the details. It is the greatest way to decrease the `[<cept>]`_cognitive load_ of both engineering work and technology usage.
+_Encapsulation_, in computer programming, is the enclosing of computational artifacts (data and code) into _named_ containers (here meaning distinct program regions) for the purpose of avoiding code duplication, program structuring and organization, and abstraction and simplification of the top-level program loop. Encapsulation is a widely used engineering principle, allowing practitioners to implement and users to utilize technology without knowing all the details. It is the greatest way to decrease the _cognitive load_ of both engineering work and technology usage.
 
-The main encapsulation features of computer programming languages, and also available in the single-file MakeCode programming environment for the micro:bit, are `[<cept>]`_functions_, `[<cept>]`_classes_, and `[<cept>]`_namespaces_. Other environments allow for multi-file programs, thus making files part of the encapsulation and abstraction hierarchy of functions, classes, and namespaces. Other languages additionally organize programs into `[<cept>]`_modules_, `[<cept>]`_packages_, and other top-level structural elements.
+The main encapsulation features of computer programming languages, and also available in the single-file MakeCode programming environment for the micro:bit, are _functions_, _classes_, and _namespaces_. Other environments allow for multi-file programs, thus making files part of the encapsulation and abstraction hierarchy of functions, classes, and namespaces. Other languages additionally organize programs into _modules_, _packages_, and other top-level structural elements.
 
 ##### Functions
 
-Functions encapsulate `[<cept>]`_code_. They are `[<cept>]`_declared_ as _named executable_ sub-programs. A function's name allows the function to execute when when it is `[<cept>]`_called_. A functions operation can be `[<cept>]`_parameterized_, that is, the data they operate on can be abstracted. When a parameterized function is called, the caller specifies `[<cept>]`_arguments_, that is, data for all function parameters. Functions can also return a single instance of any data type. This makes functions encapsulated sub-programs which have input and output. Functions are said to define an `[<cept>]`_input-output contract_. This contract is said to be a function's `[<cept>]`_invariant_. The first line of a function, the one that specifies its parameters and return type, is called a `[<cept>]`_signature_. In JavaScript, functions are `[<cept>]`_first-class citizens_, meaning they can be used everywhere variables are used.  
+Functions encapsulate _code_. They are _declared_ as _named executable_ sub-programs. A function's name allows the function to execute when when it is _called_. A functions operation can be _parameterized_, that is, the data they operate on can be abstracted. When a parameterized function is called, the caller specifies _arguments_, that is, data for all function parameters. Functions can also return a single instance of any data type. This makes functions encapsulated sub-programs which have input and output. Functions are said to define an _input-output contract_. This contract is said to be a function's _invariant_. The first line of a function, the one that specifies its parameters and return type, is called a _signature_. In JavaScript, functions are _first-class citizens_, meaning they can be used everywhere variables are used.  
 
 ```javascript
 // Example 6.1.1
@@ -251,9 +251,9 @@ basic.forever(() => { led.plot(2, 2); pause(100); led.unplot(2, 2); pause(100); 
 
 ##### Classes
 
-Classes encapsulate code and data into `[<cept>]`_objects_ of programmer-defined `[<cept>]`_data types_. The term `[<cept>]`_class_ is synonymous with the term `[<cept>]`_type_, and the two terms are frequently used interchangeably. 
+Classes encapsulate code and data into _objects_ of programmer-defined _data types_. The term _class_ is synonymous with the term _type_, and the two terms are frequently used interchangeably. 
 
-We know data have types. So, why do classes also encapsulate code along with the data? Because a type allows some operations and not others, thus making code a part of the definition of the type. For example, integers and strings allow completely different operations. Their operation sets are actually completely `[<cept>]`_disjoint_. The overloaded `+` operator does not change that, since it means _addition_ for integers and _concatenation_ for strings. We cannot meaningfully add strings the way we add integers, nor concatenate integers the way we concatenate strings. The `[<cept>]`_class methods_ comprise an exhaustive set of the operations that can be applied to objects of the class (aka type). In fact, the methods are a stronger determinant of the type than the data fields, as those can be changed without changing the input-output contract of the methods.
+We know data have types. So, why do classes also encapsulate code along with the data? Because a type allows some operations and not others, thus making code a part of the definition of the type. For example, integers and strings allow completely different operations. Their operation sets are actually completely _disjoint_. The overloaded `+` operator does not change that, since it means _addition_ for integers and _concatenation_ for strings. We cannot meaningfully add strings the way we add integers, nor concatenate integers the way we concatenate strings. The _class methods_ comprise an exhaustive set of the operations that can be applied to objects of the class (aka type). In fact, the methods are a stronger determinant of the type than the data fields, as those can be changed without changing the input-output contract of the methods.
 
 ##### Namespaces
 
@@ -266,15 +266,15 @@ namespace screensaver {
     // some of it may be exported (see the next example)
 }
 ```
-Everything inside the curly braces `{}` is part of the namespace. A namespace is a `[<cept>]`_nested scope_. The `screensaver` namespace is nested in the top-level (aka `[<cept>]`_global_) scope.  
+Everything inside the curly braces `{}` is part of the namespace. A namespace is a _nested scope_. The `screensaver` namespace is nested in the top-level (aka _global_) scope.  
 
-The "packages" of functions in the MakeCode environment (e.g. `basic`, `input`, `leds`, etc.) are all namespaces. If you are curious, you can explore the code of the [core MakeCode library](https://github.com/microsoft/pxt-microbit/tree/master/libs/core). The programming languages in which the files are written can most often be inferred from their `[<cept>]`_file extensions_:
+The "packages" of functions in the MakeCode environment (e.g. `basic`, `input`, `leds`, etc.) are all namespaces. If you are curious, you can explore the code of the [core MakeCode library](https://github.com/microsoft/pxt-microbit/tree/master/libs/core). The programming languages in which the files are written can most often be inferred from their _file extensions_:
 1. `.ts` stands for TypeScript. _Remember that what we are programming in MakeCode is actually [TypeScript](https://makecode.com/language), despite calling it JavaScript._  
 2. `.cpp` stands for C++.  
 3. `.h` stands for header file (in C and C++).  
 4. `.json` stands for JSON, a simple data format.  
 5. `.jres` stands for a JSON file where project resources are stored.  
-6. `.s` stands for `[<cept>]`_assembler_ (aka `[<cept>]`_assembly language_). This is the form of directly-executable code your programs are translated (the actual term is `[<cept>]`_compiled_) into. Both terms only make sense in their original historical setting, but have remained in usage ever since.    
+6. `.s` stands for _assembler_ (aka _assembly language_). This is the form of directly-executable code your programs are translated (the actual term is _compiled_) into. Both terms only make sense in their original historical setting, but have remained in usage ever since.    
 
 Here is part of the `basic` namespace, contained in the [basic.ts](https://github.com/microsoft/pxt-microbit/blob/master/libs/core/basic.ts) file in the MakeCode codebase. The rest is in [basic.cpp](https://github.com/microsoft/pxt-microbit/blob/master/libs/core/basic.cpp), which is written in C++ and you don't have to read it.
 ```javascript
@@ -317,7 +317,7 @@ Notice the `export` keyword in front of the `showNumber`. This is what allows co
 #### 2. Apply
 [[toc](#table-of-contents)]
 
-1. `[<lernact-prac>]`Encapsulate your screensaver code in a namespace `screensaver` so that the only code that is outside is the main program loop, which calls functions exported by the namespace. In particular:
+1. Encapsulate your screensaver code in a namespace `screensaver` so that the only code that is outside is the main program loop, which calls functions exported by the namespace. In particular:
    1. The function `coding()` should be exported.  
    2. The function `rain()` should be exported.  
    3. The function `freqBars()` should be exported.  
@@ -326,7 +326,7 @@ Notice the `export` keyword in front of the `showNumber`. This is what allows co
    6. The class `Raindrop` should _not_ be exported.  
    7. The class `Marble` should _not_ be exported.  
    8. Any global data and code necessary for the main loop should remain outside of the namespace (e.g. the type `enum Mode`, the variables of type `Gesture` and `Gesture[]`, etc.).  
-2. `[<lernact-prac>]`**[Optional challenge, max 10 extra step points]** Write a class to represent `[<cept>]`_unsigned_ binary integers as strings (e.g. `00011..` is 3<sub>10</sub>), called `UnsignedBinary`. Specifically:
+2. **[Optional challenge, max 10 extra step points]** Write a class to represent _unsigned_ binary integers as strings (e.g. `00011..` is 3<sub>10</sub>), called `UnsignedBinary`. Specifically:
    1. The strings contain two dots at the end as a subscript indicating the number is in binary.  
    2. The binary strings are at most 16 bits long (not counting the subscript).  
    3. The constructor takes a string `constructor(bin_str : string, carry : boolean)` and:  
@@ -383,18 +383,18 @@ In the [Lab Notebook](README.md):
 [[toc](#table-of-contents)]
 
 ##### Input-output contract  
-`[<lernact-rd>]`The input-output contract of a function consists of the particular transformation of the input data (that is, the arguments) into the output data (that is, the return value). Even functions which do not return anything have an input-output contract, as they may be modifying internal data structures (e.g. class methods). Functions which do not take any arguments are often called `[<cept>]`_routines_.
+The input-output contract of a function consists of the particular transformation of the input data (that is, the arguments) into the output data (that is, the return value). Even functions which do not return anything have an input-output contract, as they may be modifying internal data structures (e.g. class methods). Functions which do not take any arguments are often called _routines_.
 
 Formally, the input-output contract includes the number and types of function parameters as well as the type of the return value, if any. The shortest expression of the input-output contract is the function _signature_.
 
 The input-output contract of a function is an _invariant_, meaning that it is strictly fixed, and _does not change_ even when the specific implementation of the function changes. A function is thus an _encapsulation of an input-output contract_.
 
-Functions can also perform operations that are not strictly part of the input-output contract and are not otherwise explicitly stated. Such operations are therefore called `[<cept>]`_side effects_. Side effects relate to a very important feature of functional input-output contracts, namely that the latter guarantee that the program state is `[<cept>]`_consistent_ before and after the execution of a function (though it may briefly become inconsistent in the middle of its execution); side effects are potential holes in the input-output contract, and may introduce subtle inconsistencies that are hard to trace and fix.  
+Functions can also perform operations that are not strictly part of the input-output contract and are not otherwise explicitly stated. Such operations are therefore called _side effects_. Side effects relate to a very important feature of functional input-output contracts, namely that the latter guarantee that the program state is _consistent_ before and after the execution of a function (though it may briefly become inconsistent in the middle of its execution); side effects are potential holes in the input-output contract, and may introduce subtle inconsistencies that are hard to trace and fix.  
 
 ##### Pass by value vs pass by reference  
 
-`[<lernact-rd>]`An important aspect of functions is how the arguments are passed to the function through the function call. There are two ways:
-1. `[<cept>]`_Pass by value_ means that the value of the argument is a copy of the original variable (unless it is a _literal_ in which case it is not a copy of anything, for example the number `3`). In this case, the function can use the value but cannot modify the original variable. This method works for all `[<cept>]`_primitive_ data types.  
+An important aspect of functions is how the arguments are passed to the function through the function call. There are two ways:
+1. _Pass by value_ means that the value of the argument is a copy of the original variable (unless it is a _literal_ in which case it is not a copy of anything, for example the number `3`). In this case, the function can use the value but cannot modify the original variable. This method works for all _primitive_ data types.  
 ```javascript
 // Example 7.1.1
 
@@ -417,7 +417,7 @@ basic.showNumber(a)  // only now does a change, because we assigned a new value 
 ```  
 <img src="images/pass-by-value.png" alt="Pass by value" width="600" />  
 
-2. `[<cept>]`_Pass by reference_ means that the value of the argument is actually the `[<cept>]`_memory address_ (aka `[<cept>]`_pointer_, esp. in C/C++) of the data structure or object that is being passed. In this case, the function modifies the original variable. This method works for all arrays and class instances.  
+2. _Pass by reference_ means that the value of the argument is actually the _memory address_ (aka _pointer_, esp. in C/C++) of the data structure or object that is being passed. In this case, the function modifies the original variable. This method works for all arrays and class instances.  
 ```javascript
 // Example 7.1.2
 
@@ -438,15 +438,15 @@ arr.forEach(function (value: number, index: number) {
    
 ##### Function naming
 
-`[<lernact-rd>]`The argument over function naming has been long and intense, so we are only going to mention two very popular styles that we have already used:
-1. `[<cept>]`_Camel case_ capitalizes every word in the function name except the first one (e.g. `frequencyBars` and `freqBars`).  
-2. `[<cept>]`_Snake case_ is all lower-case and divides the words in the function name with underscores (e.g. `bouncing_marbles`).   
+The argument over function naming has been long and intense, so we are only going to mention two very popular styles that we have already used:
+1. _Camel case_ capitalizes every word in the function name except the first one (e.g. `frequencyBars` and `freqBars`).  
+2. _Snake case_ is all lower-case and divides the words in the function name with underscores (e.g. `bouncing_marbles`).   
 
 It doesn't matter that much which one you use, as long as you are consistent. This said, we have been inconsistent in naming our screensavers, but only so that we can explicitly talk about these two function naming conventions.  
 
 ##### Recursive functions  
 
-`[<lernact-rd>]`Functions can call themselves. Since the signature of the function is already known by the time any call can be made from inside the function block, that call can be to the same function. This is called `[<cept>]`[_recursion_](https://en.wikipedia.org/wiki/Recursion_(computer_science)). Let's see an example:
+Functions can call themselves. Since the signature of the function is already known by the time any call can be made from inside the function block, that call can be to the same function. This is called [_recursion_](https://en.wikipedia.org/wiki/Recursion_(computer_science)). Let's see an example:
 ```javascript
 // Example 7.1.3
 
@@ -462,25 +462,25 @@ basic.showNumber(factorial(5))
 ```
 Notice the following main points:
 1. The recursive call is always with a "smaller" argument (e.g. a number minus one, or a subarray of the original array). The recursive call is solving a _smaller problem_.    
-2. There is always a `[<cept>]`_termination condition_, in our case when a equals 1. This is the _smallest possible problem_ and it terminates the recursive call chain. Forgetting a termination condition will most often result in what is called an `[<cept>]`_infinite loop_.  
+2. There is always a _termination condition_, in our case when a equals 1. This is the _smallest possible problem_ and it terminates the recursive call chain. Forgetting a termination condition will most often result in what is called an _infinite loop_.  
 
-We need to note that recursive functions, while they look very elegant, are very wasteful of space (that is, memory), as they keep calling themselves until they reach the termination condition. All these copies of the function fill up the `[<cept>]`[_call stack_](https://medium.com/@ryanfarney/breaking-down-the-call-stack-e68b5633fbad), a special memory region that keeps function data for all outstanding function calls.    
+We need to note that recursive functions, while they look very elegant, are very wasteful of space (that is, memory), as they keep calling themselves until they reach the termination condition. All these copies of the function fill up the [_call stack_](https://medium.com/@ryanfarney/breaking-down-the-call-stack-e68b5633fbad), a special memory region that keeps function data for all outstanding function calls.    
 
 
 #### 2. Apply
 [[toc](#table-of-contents)]
 
-1. `[<lernact-prac>]`Write a function `BubbleSort(arr : number[]) : void` to `[<cept>]`_sort_ `[<cept>]`_in place_ a numeric array, using the [Bubble Sort](https://en.wikipedia.org/wiki/Bubble_sort) algorithm. Requirements and notes:
+1. Write a function `BubbleSort(arr : number[]) : void` to _sort_ _in place_ a numeric array, using the [Bubble Sort](https://en.wikipedia.org/wiki/Bubble_sort) algorithm. Requirements and notes:
    1. The function should take an array of numbers and sort it _in place_, without creating a new array.  
-   2. The array should be sorted in `[<cept>]`_ascending_ order (e.g. `[1, 5, 17, 80, ...]`.  
+   2. The array should be sorted in _ascending_ order (e.g. `[1, 5, 17, 80, ...]`.  
    3. The function should not return anything.  
-   4. There are two versions of Bubble Sort: [iterative and recursive](https://www.techiedelight.com/bubble-sort-iterative-recursive/). This function should implement an `[<cept>]`_iterative_ Bubble Sort. _Hint: The C syntax is closest to TypeScript, so you should read the C versions of the solutions in the referenced resource, for guidance._  
-   5. An `[<cept>]`_algorithm_ is an exact series of precise (computational) steps that solves a certain problem or a class of problems. `[<cept>]`_Sorting_ is one of the most often performed computational activity in the modern world and there are many [sorting algorithms](https://en.wikipedia.org/wiki/Sorting_algorithm). Bubble Sort is not an efficient algorithm and is therefore not used in practice. However, it is great for developing intuition about the problem to be solved. For further intuition, watch this short [YouTube video](https://www.youtube.com/watch?v=kPRA0W1kECg&t=130s).
+   4. There are two versions of Bubble Sort: [iterative and recursive](https://www.techiedelight.com/bubble-sort-iterative-recursive/). This function should implement an _iterative_ Bubble Sort. _Hint: The C syntax is closest to TypeScript, so you should read the C versions of the solutions in the referenced resource, for guidance._  
+   5. An _algorithm_ is an exact series of precise (computational) steps that solves a certain problem or a class of problems. _Sorting_ is one of the most often performed computational activity in the modern world and there are many [sorting algorithms](https://en.wikipedia.org/wiki/Sorting_algorithm). Bubble Sort is not an efficient algorithm and is therefore not used in practice. However, it is great for developing intuition about the problem to be solved. For further intuition, watch this short [YouTube video](https://www.youtube.com/watch?v=kPRA0W1kECg&t=130s).
    6. Write a short program that uses your function. It should:
       1. Scroll "Input:" and then the input array. The input array should be `[14, 19, 3, 2, 0, 56, 12, 7, 90, 1, 11]`.     
       2. When done, it should scroll "Sorted:" and then the sorted array.  
-2. `[<lernact-prac>]`**[Note: The solution to this problem will count for 2 extra step points]** Implement a _recursive_ `BubbleSort(arr : number[]) : void`. Run the same program you wrote to demo the iterative solution.  
-3. `[<lernact-prac>]`**[Optional challenge, max 10 extra step points]** Design and implement the game [Tower of Hanoi](https://en.wikipedia.org/wiki/Tower_of_Hanoi) and a recursive solution. [Practice](https://www.mathsisfun.com/games/towerofhanoi.html) to get an intuition. Requirements and notes:
+2. **[Note: The solution to this problem will count for 2 extra step points]** Implement a _recursive_ `BubbleSort(arr : number[]) : void`. Run the same program you wrote to demo the iterative solution.  
+3. **[Optional challenge, max 10 extra step points]** Design and implement the game [Tower of Hanoi](https://en.wikipedia.org/wiki/Tower_of_Hanoi) and a recursive solution. [Practice](https://www.mathsisfun.com/games/towerofhanoi.html) to get an intuition. Requirements and notes:
    1. Your program should be able to take a 3-peg game, with a tower of up to 7 stories at the leftmost peg, and solve it by moving the tower to the rightmost peg.  
    2. Your program should use **recursion** to solve the game.  
    3. Your program should have two display modes:  
@@ -513,14 +513,14 @@ In the [Lab Notebook](README.md):
 
 ##### Classes are type definitions
 
-`[<lernact-rd>]`So, what are classes after all? We mentioned that they are `[<cept>]`_templates_ for `[<cept>]`_objects_, but that is too abstract and not well grounded. Most importantly, classes are `[<cept>]`_data type definitions_. A class defines a data type by defining its relationships with the rest of the data types in the computing environment (e.g. the `BrightPoint` class is essentially an array of three integers, `x`, `y`, and `b`) and constrains the operations that can be performed on objects of this type. Specifically, a class does that in the following ways:
+So, what are classes after all? We mentioned that they are _templates_ for _objects_, but that is too abstract and not well grounded. Most importantly, classes are _data type definitions_. A class defines a data type by defining its relationships with the rest of the data types in the computing environment (e.g. the `BrightPoint` class is essentially an array of three integers, `x`, `y`, and `b`) and constrains the operations that can be performed on objects of this type. Specifically, a class does that in the following ways:
 1. Defines the **data** that an object of this type contains.  
 2. Defines the **methods** that can be applied (that is, called on) objects of this type.   
-3. If necessary, rejects **anomalous usage** (e.g. division by zero) with the help of an important language feature called `[<cept>]`[_exception handling_](https://basarat.gitbook.io/typescript/type-system/exceptions). 
+3. If necessary, rejects **anomalous usage** (e.g. division by zero) with the help of an important language feature called [_exception handling_](https://basarat.gitbook.io/typescript/type-system/exceptions). 
 
 ##### Exceptions
 
-`[<lernact-rd>]``[<cept>]`_Exceptions_ are a mechanism for preventing disallowed usage of a data type and/or program because if such usage were to be allowed, the program state would become irrecoverably `[<cept>]`_inconsistent_. For example, knowing that division by zero is not mathematically defined, how can we rely on a program that has tried to divide by zero? Exceptions prevent this and similar anomalous behavior from ever happening and provide a recovery mechanism. Here is a canonical example **(note: does not work in makecode)**:
+_Exceptions_ are a mechanism for preventing disallowed usage of a data type and/or program because if such usage were to be allowed, the program state would become irrecoverably _inconsistent_. For example, knowing that division by zero is not mathematically defined, how can we rely on a program that has tried to divide by zero? Exceptions prevent this and similar anomalous behavior from ever happening and provide a recovery mechanism. Here is a canonical example **(note: does not work in makecode)**:
 ```javascript
 // Example 8.1.1
 
@@ -588,16 +588,16 @@ So, `throw` works to give you minimal functionality to reject unsupported input 
 
 ##### Objects are dictionaries
 
-`[<lernact-rd>]`Another way to look at classes is to focus on the objects themselves and realize that they are `[<cept>]`_dictionaries_. Dictionaries in computing are data structures which match `[<cept>]`_keys_ with `[<cept>]`_values_. They are also called `[<cept>]`_maps_ or `[<cept>]`_hash tables_, but they are just collections of data pairs. The value can be anything, literally anything, including the same value throughout the dictionary. However, the keys have to be `[<cept>]`_unique_. There cannot be two different key-value pairs with the same key.
+Another way to look at classes is to focus on the objects themselves and realize that they are _dictionaries_. Dictionaries in computing are data structures which match _keys_ with _values_. They are also called _maps_ or _hash tables_, but they are just collections of data pairs. The value can be anything, literally anything, including the same value throughout the dictionary. However, the keys have to be _unique_. There cannot be two different key-value pairs with the same key.
 
-The keys of the objects are their field names (e.g. the `x`, `y`, and `b` of `BrightPoint` objects) and the values are their specific values, which are different for every object. This is the essence of objects - their independent `[<cept>]`_lifecycle_ - and correspondingly a very valid perspective on what classes are, as object templates. In fact, in JavaScript, this is the dominating perspective!
+The keys of the objects are their field names (e.g. the `x`, `y`, and `b` of `BrightPoint` objects) and the values are their specific values, which are different for every object. This is the essence of objects - their independent _lifecycle_ - and correspondingly a very valid perspective on what classes are, as object templates. In fact, in JavaScript, this is the dominating perspective!
 
 If you want to read the implementation details of the JavaScript-like language that we use in MakeCode, called Static TypeScript (STS), read their [paper](https://www.microsoft.com/en-us/research/publication/static-typescript/). It's a fascinating read, once you get used to the terminology, and provides an enticing peek into the software stack of the micro:bit.  
 
 
 ##### Getters and setters
 
-`[<lernact-rd>]`In the line of the objects-as-dictionaries perspective on classes that we just discussed, we should mention a very common pattern for class methods, namely the so called `[<cept>]`[_getters and setters_](https://developer.mozilla.org/en-US/docs/Learn/JavaScript/Objects/Inheritance#Getters_and_Setters), (aka `get` and `set` accessors). These are methods with specific syntax that are just there to allow us to get and set the values in the "object dictionary". Here's an example:
+In the line of the objects-as-dictionaries perspective on classes that we just discussed, we should mention a very common pattern for class methods, namely the so called [_getters and setters_](https://developer.mozilla.org/en-US/docs/Learn/JavaScript/Objects/Inheritance#Getters_and_Setters), (aka `get` and `set` accessors). These are methods with specific syntax that are just there to allow us to get and set the values in the "object dictionary". Here's an example:
 ```javascript
 // Example 8.1.3
 
@@ -637,26 +637,26 @@ basic.showNumber(p0.x)
 Notice the following:
 1. The `get` and `set` keywords.  
 2. The underscore in `_x` and `_y` to avoid duplicate names with the getters and setters of `x` and `y`.
-3. The `private` keyword in front of `_x` and `_y`, which disallows calls like `p0._x` (that is, direct access to the object fields). `[<cept>]`_Hiding_ the implementation of the functionality encapsulated in a class is the reason for the popularity of getters and setters in the first place. _The detailed considerations belong to the theory and history of object-oriented programming._      
+3. The `private` keyword in front of `_x` and `_y`, which disallows calls like `p0._x` (that is, direct access to the object fields). _Hiding_ the implementation of the functionality encapsulated in a class is the reason for the popularity of getters and setters in the first place. _The detailed considerations belong to the theory and history of object-oriented programming._      
 
 
 #### 2. Apply
 [[toc](#table-of-contents)]
 
-1. `[<lernact-prac>]`In a namespece `Complex`:
-   1. Write a class to represent `[<cept>]`[_complex numbers_](https://www.mathsisfun.com/numbers/complex-numbers.html), called `ComplexNumber`.  
+1. In a namespece `Complex`:
+   1. Write a class to represent [_complex numbers_](https://www.mathsisfun.com/numbers/complex-numbers.html), called `ComplexNumber`.  
    2. Implement the function `Complex.add(a : ComplexNumber, b : ComplexNumber) : ComplexNumber`.   
    3. Implement the function `Complex.conjugate(a : ComplexNumber) : ComplexNumber`.   
    4. Implement the function `Complex.multiply(a : ComplexNumber, b : ComplexNumber) : ComplexNumber`.   
    5. Implement the function `Complex.showComplex(c : ComplexNumber) : void` to scroll a complex number as a string (e.g. `"-14-i31"`, `i`, `-i6`, `4+i7`, etc.).  
-2. `[<lernact-prac>]`Using the `ComplexNumber` and the `Complex` methods, define the numbers `6+i7` and `-8-i5`, and:
+2. Using the `ComplexNumber` and the `Complex` methods, define the numbers `6+i7` and `-8-i5`, and:
    1. Add them. The program should scroll the first number, then show `+` for 1500 ms, then scroll the second number, then show `=` for 1500 ms, and finally scroll the result. _Note that you cannot use `showString` for the plus. You will have to define your own icon `Plus`._  
    2. Find their conjugates. For each number, the program should scroll the number, then show `C` for 1500 ms, and finally scroll the result. _See the previous note._   
    3. Multiply them. The program should scroll the first number, then show a custom icon `Mult` (a X centered at (2, 2) and spanning the 3x3 square with origin at (1, 1)) for 1500 ms, then scroll the second number, then show `=` for 1500 ms, and finally scroll the result.  
-3. `[<lernact-prac>]`**[Optional challenge, max 10 extra step points]** In the namespace `Complex`:
-   1. Write a class to represent `[<cept>]`_fractions_, called `Fraction`. Fractions should show in their `[<cept>]`_reduced form_. If a `Fraction` object is defined in `[<cept>]`_irreduced form_, it should be reduced internally in the constructor. 
+3. **[Optional challenge, max 10 extra step points]** In the namespace `Complex`:
+   1. Write a class to represent _fractions_, called `Fraction`. Fractions should show in their _reduced form_. If a `Fraction` object is defined in _irreduced form_, it should be reduced internally in the constructor. 
    2. Implement the function `Complex.showFraction(f : ComplexNumber) : void` to scroll a reduced fraction as a string (e.g. `"15/16"`, `7`, `13/14`, `9/5`, etc.).  
-   3. Modify your `ComplexNumber` class to work with fractions instead of `[<cept>]`[_continuous real and imaginary coefficients_](https://proofwiki.org/wiki/Real_and_Imaginary_Part_Projections_are_Continuous). If the `[<cept>]`_real_ or `[<cept>]`_imaginary_ part of the a complex is an irreducible fraction, show the number with fractional (not continous real) `[<cept>]`_coefficients_.  
+   3. Modify your `ComplexNumber` class to work with fractions instead of [_continuous real and imaginary coefficients_](https://proofwiki.org/wiki/Real_and_Imaginary_Part_Projections_are_Continuous). If the _real_ or _imaginary_ part of the a complex is an irreducible fraction, show the number with fractional (not continous real) _coefficients_.  
    4. Modify your `showComplex` function to show complex numbers with integers or fractional coefficients (e.g. `12/13+i4/7`, `-14-i31`, `9/5-i7`, etc.).  
    5. Divide `6+i7` by `-8-i5`. The program should scroll the first number, then show a custom icon `Div` (a / centered at (2, 2) and spanning the 3x3 square with origin at (1, 1)) for 500 ms, then scroll the second number, then show `=` for 500 ms, and finally scroll the result. _Note the result has to be in the canonical form A + iB, where A and B are either integers or fractions._    
 

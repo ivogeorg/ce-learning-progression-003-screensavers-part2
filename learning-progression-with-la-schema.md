@@ -171,18 +171,10 @@ While we will cover `[<cept>]`_threads_ (that is, _execution threads_), `[<cept>
 #### 2. Apply
 [[toc](#table-of-contents)]
 
-1. `[<lernact-prac>]`Write a function `randomPrime` that generates random primes in the range [1, 1000]. _How many primes are there in this range?_ Write a small program to demonstrate the operation. 
-
-   _So, a program that generates random numbers, and then determines whether or not they are prime? The algorithm that came to my mind generates a random number, then looks for any factors in a for loop, and uses recursion to call the function again if it finds a non-prime factor. Is that the kind of thing you intended?_ 
-
+1. `[<lernact-prac>]`Write a function `randomPrime` that generates random primes in the range [1, 1000]. _How many primes are there in this range?_ Write a small program to demonstrate the operation. _Hint: In a previous Step, you wrote a program to leave only the prime numbers in an array originally filled with the numbers [1, 100]. Extend this program to work for an array filled with the numbers [1, 1000]._    
 2. `[<lernact-prac>]`Add depth (aka distance) to your rain simulation, with more distant raindrops appearing dimmer and moving more slowly.  
-
-3. `[<lernact-prac>]`Implement the `bouncing_marbles()` screensaver function and add it to your screensavers program matched to the `Shake` gesture. Requirements:
-
-   _It looks like you meant to add more here._
-
+3. `[<lernact-prac>]`Implement the `bouncing_marbles()` screensaver function and add it to your screensavers program matched to the `Shake` gesture.  
 4. `[<lernact-prac>]`**[Optional challenge, max 3 extra step points]** Modify your `rain()` function to show the raindrops falling at 45° to the right.  
-
 5. `[<lernact-prac>]`**[Optional challenge, max 3 extra step points]** Modify your `bouncing_marbles()` to be able to show balls of different trajectories, simulating different elasticity coefficients of the marble material (think steel vs glass vs rubber resin).  
 
 #### 3. Present
@@ -325,10 +317,7 @@ Notice the `export` keyword in front of the `showNumber`. This is what allows co
 #### 2. Apply
 [[toc](#table-of-contents)]
 
-1. `[<lernact-prac>]`Encasulate your screensaver code in a namespace `screensaver` so that the only code that is outside is the main program loop, which calls functions exported by the namespace. In particular:
-
-   _So, if I understand correctly, we can only use one file, so copy all of the subsequent functions and classes into this namespace. Then, call the functions from outside of the namespace?_
-   
+1. `[<lernact-prac>]`Encapsulate your screensaver code in a namespace `screensaver` so that the only code that is outside is the main program loop, which calls functions exported by the namespace. In particular:
    1. The function `coding()` should be exported.  
    2. The function `rain()` should be exported.  
    3. The function `freqBars()` should be exported.  
@@ -658,12 +647,9 @@ Notice the following:
    4. Implement the function `Complex.multiply(a : ComplexNumber, b : ComplexNumber) : ComplexNumber`.   
    5. Implement the function `Complex.showComplex(c : ComplexNumber) : void` to scroll a complex number as a string (e.g. `"-14-i31"`, `i`, `-i6`, `4+i7`, etc.).  
 2. `[<lernact-prac>]`Using the `ComplexNumber` and the `Complex` methods, define the numbers `6+i7` and `-8-i5`, and:
-   1. Add them. The program should scroll the first number, then show `+` for 500 ms, then scroll the second number, then show `=` for 500 ms, and finally scroll the result. _Note that you cannot use `scrollString` for the plus. You will have to define your own icon `Plus`._  
-   
-   _I don't understand this note. Do you mean that they can't use `showString`? If so, I don't understand why not, `+` is in ascii and can therefore be shown like any other character. If this is supposed to be a custom icon, I think more clarity on that will be necessary._
-   
-   2. Find their conjugates. For each number, the program should scroll the number, then show `C` for 500 ms, and finally scroll the result. _See the previous note._   
-   3. Multiply them. The program should scroll the first number, then show a custom icon `Mult` (a X centered at (2, 2) and spanning the 3x3 square with origin at (1, 1)) for 500 ms, then scroll the second number, then show `=` for 500 ms, and finally scroll the result.  
+   1. Add them. The program should scroll the first number, then show `+` for 1500 ms, then scroll the second number, then show `=` for 1500 ms, and finally scroll the result. _Note that you cannot use `showString` for the plus. You will have to define your own icon `Plus`._  
+   2. Find their conjugates. For each number, the program should scroll the number, then show `C` for 1500 ms, and finally scroll the result. _See the previous note._   
+   3. Multiply them. The program should scroll the first number, then show a custom icon `Mult` (a X centered at (2, 2) and spanning the 3x3 square with origin at (1, 1)) for 1500 ms, then scroll the second number, then show `=` for 1500 ms, and finally scroll the result.  
 3. `[<lernact-prac>]`**[Optional challenge, max 10 extra step points]** In the namespace `Complex`:
    1. Write a class to represent `[<cept>]`_fractions_, called `Fraction`. Fractions should show in their `[<cept>]`_reduced form_. If a `Fraction` object is defined in `[<cept>]`_irreduced form_, it should be reduced internally in the constructor. 
    2. Implement the function `Complex.showFraction(f : ComplexNumber) : void` to scroll a reduced fraction as a string (e.g. `"15/16"`, `7`, `13/14`, `9/5`, etc.).  

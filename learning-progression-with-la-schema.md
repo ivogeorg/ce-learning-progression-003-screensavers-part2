@@ -322,7 +322,7 @@ Notice the `export` keyword in front of the `showNumber`. This is what allows co
    2. The function `rain()` should be exported.  
    3. The function `freqBars()` should be exported.  
    4. The function `bouncing_marbles()` should be exported.  
-   5. Any global data necessary for the screensaver or working functions should be _encapsulated in the functions_.  
+   5. Any global data necessary for the screensaver or working functions should be _encapsulated in the namespace_.  
    6. The class `Raindrop` should _not_ be exported.  
    7. The class `Marble` should _not_ be exported.  
    8. Any global data and code necessary for the main loop should remain outside of the namespace (e.g. the type `enum Mode`, the variables of type `Gesture` and `Gesture[]`, etc.).  

@@ -142,6 +142,7 @@ Here is a code snippet (not an executable program) from the `move()` method of t
         if (this.counter % this.trajectory[this.step][Trajectory.Duration] == 0) {
             led.unplot(this.x, this.y)
             this.step ++
+            this.counter = 0
             if (this.step == this.trajectory.length) {
                 this.active = false
             } else {
